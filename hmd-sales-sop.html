@@ -3,77 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HMD Website Requests — Sales Team Guide</title>
+<title>HMD Team Guide</title>
 
 <!--
   HOW TO EDIT THIS GUIDE
   ----------------------
-  Everything you need to change is plain text inside <body>.
-  Each chapter is one <section>. Copy a whole <section> to add a chapter.
+  The guide has one tab per <div class="tab-panel">. Each tab holds <section> chapters.
+  The left menu is built automatically from each section's <h2>, so a new section
+  only needs a unique id and an <h2>.
+
+  To add a tab: copy a whole <div class="tab-panel" id="..." data-title="...">,
+  then add a matching <button data-tab="..."> in the tab bar.
 
   Building blocks you can reuse:
-    <ol class="steps">            numbered steps
-    <table>                       simple table
-    <div class="note">            grey-blue information box
-    <div class="action">          red "What you do" box (one per section)
+    <ol class="steps">                       numbered steps
+    <table> inside <div class="table-wrap">  simple table
+    <div class="note">                       grey-blue information box
+    <div class="action">                     red "What you do" box
+    <div class="rule-box">                   teal rules box
     <div class="cards"> + <article class="card">   side-by-side cards
+    <article class="stage">                  one pipeline stage (see the Machinery tab)
+    <span class="tag auto|manual|client|internal|planned">  small labels
 
   Colours and fonts are set once in :root below.
-  The logo image lives in the last <style> block at the bottom of the file — leave it alone.
+  The logo image lives in the last <style> block at the bottom of the file. Leave it alone.
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   /* ---------- Brand settings ---------- */
   :root {
     --red: #ED001C;
+    --red-tint: #FFF5F6;
     --navy: #163B62;
     --navy-mid: #5C7591;
     --navy-light: #A2B1C0;
     --teal: #00C2B1;
+    --teal-dark: #00897D;
     --teal-light: #BCE5E0;
+    --teal-tint: #EAF8F6;
+    --orange: #B85C00;
+    --orange-tint: #FFF3E3;
     --ink: #161616;
     --paper: #FFFFFF;
     --tint: #F4F7FA;
+    --rule: #E1E7ED;
     --head: "Monument Extended", "Montserrat", sans-serif;
     --body: "Montserrat", Arial, sans-serif;
+    --sidebar: 250px;
   }
 
   /* ---------- Base ---------- */
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--tint); color: var(--ink); font: 16px/1.5 var(--body); }
+  html { scroll-padding-top: 76px; }
+  body { margin: 0; background: var(--tint); color: var(--ink); font: 15px/1.55 var(--body); }
   h1, h2, h3 { font-family: var(--head); font-weight: 800; line-height: 1.2; letter-spacing: 0.02em; color: var(--navy); margin: 0; }
   p { margin: 0 0 12px; }
-  strong { font-weight: 700; }
-  .page { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+  strong, b { font-weight: 700; }
+  a { color: var(--navy); }
+  img { max-width: 100%; display: block; }
 
   /* ---------- Cover ---------- */
-  .cover { background: var(--navy); color: var(--paper); padding: 40px 16px 56px; position: relative; overflow: hidden; }
-  .cover::before { content: ""; position: absolute; right: -120px; bottom: -160px; width: 420px; height: 420px; border: 60px solid rgba(255,255,255,0.06); border-radius: 50%; }
-  .cover-inner { max-width: 900px; margin: 0 auto; padding: 0 16px; position: relative; }
-  .cover-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; font-size: 14px; color: var(--navy-light); }
-  .cover .eyebrow { color: var(--teal); font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
-  .cover h1 { color: var(--paper); font-size: clamp(30px, 6vw, 52px); text-transform: uppercase; }
-  .cover .sub { font-size: 20px; color: var(--teal-light); margin: 16px 0 0; max-width: 620px; }
-  .cover .rule { width: 72px; height: 4px; background: var(--red); margin: 28px 0; }
+  .cover { background: var(--navy); color: var(--paper); padding: 28px 16px 32px; position: relative; overflow: hidden; }
+  .cover::before { content: ""; position: absolute; right: -120px; bottom: -200px; width: 420px; height: 420px; border: 60px solid rgba(255,255,255,0.06); border-radius: 50%; }
+  .cover-inner { max-width: 1280px; margin: 0 auto; position: relative; }
+  .cover-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; font-size: 14px; color: var(--navy-light); }
+  .cover .eyebrow { color: var(--teal); font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+  .cover h1 { color: var(--paper); font-size: clamp(26px, 4.5vw, 42px); text-transform: uppercase; }
+  .cover .sub { font-size: 17px; color: var(--teal-light); margin: 12px 0 0; max-width: 720px; }
+  .cover .rule { width: 72px; height: 4px; background: var(--red); margin: 20px 0; }
   .cover .meta { display: flex; gap: 40px; flex-wrap: wrap; font-size: 14px; }
   .cover .meta span { display: block; color: var(--navy-light); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
 
-  /* ---------- Contents ---------- */
-  .toc { background: var(--paper); border-radius: 12px; padding: 20px 24px; margin: -28px 0 24px; position: relative; z-index: 2; box-shadow: 0 6px 24px rgba(22,59,98,0.08); }
-  .toc ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 32px; font-size: 14px; }
-  .toc li { margin-bottom: 6px; break-inside: avoid; }
-  .toc a { color: var(--navy); text-decoration: none; font-weight: 700; }
-  .toc a:hover { color: var(--red); }
+  /* ---------- Tab bar ---------- */
+  .tabbar { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--rule); box-shadow: 0 4px 16px rgba(22,59,98,0.06); }
+  .tabbar-inner { max-width: 1280px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; }
+  .tabbar button { flex: none; border: 0; background: none; font: 700 14px var(--body); color: var(--navy-mid); padding: 18px 14px 15px; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+  .tabbar button:hover { color: var(--navy); }
+  .tabbar button[aria-selected="true"] { color: var(--navy); border-bottom-color: var(--red); }
+  .tabbar .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+
+  /* ---------- Layout ---------- */
+  .layout { max-width: 1280px; margin: 0 auto; padding: 24px 16px 48px; display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); gap: 28px; align-items: start; }
+  .sidebar { position: sticky; top: 76px; max-height: calc(100vh - 92px); overflow-y: auto; background: var(--paper); border-radius: 12px; padding: 18px 12px; }
+  .sidebar .side-title { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-dark); padding: 0 10px 10px; }
+  .sidebar ol { list-style: none; margin: 0; padding: 0; counter-reset: side; }
+  .sidebar li { counter-increment: side; }
+  .sidebar a { display: flex; gap: 10px; padding: 8px 10px; border-radius: 6px; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; line-height: 1.35; border-left: 3px solid transparent; }
+  .sidebar a::before { content: counter(side); color: var(--navy-light); font-weight: 700; min-width: 14px; }
+  .sidebar a:hover { background: var(--tint); }
+  .sidebar a.active { background: var(--tint); border-left-color: var(--red); }
+  .sidebar a.active::before { color: var(--red); }
+  .tab-panel { display: none; min-width: 0; }
+  .tab-panel.active { display: block; }
 
   /* ---------- Sections ---------- */
-  section { background: var(--paper); border-radius: 12px; padding: 28px 24px; margin-bottom: 20px; }
-  section > h2 { font-size: 24px; margin-bottom: 6px; }
-  section > h2 .num { color: var(--teal); margin-right: 8px; }
-  section > .lead { color: var(--navy-mid); margin-bottom: 20px; }
+  section { background: var(--paper); border-radius: 12px; padding: 28px 28px; margin-bottom: 20px; }
+  section > h2 { font-size: 22px; margin-bottom: 6px; }
+  section > .lead { color: var(--navy-mid); margin-bottom: 20px; font-size: 16px; }
   h3 { font-size: 16px; margin: 24px 0 10px; }
+  .panel-head { background: var(--navy); color: var(--paper); border-radius: 12px; padding: 22px 28px; margin-bottom: 20px; position: relative; overflow: hidden; }
+  .panel-head .eyebrow { color: var(--teal); font-weight: 700; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+  .panel-head h2 { color: var(--paper); font-size: clamp(22px, 3vw, 30px); }
+  .panel-head p { color: var(--teal-light); margin: 8px 0 0; max-width: 760px; }
 
   /* ---------- Steps ---------- */
   .steps { margin: 0 0 16px; padding: 0; list-style: none; counter-reset: step; }
@@ -81,48 +115,110 @@
   .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: var(--paper); font-weight: 700; font-size: 14px; display: grid; place-items: center; }
 
   /* ---------- Boxes ---------- */
-  .note, .action { border-radius: 8px; padding: 14px 16px; margin: 16px 0 0; font-size: 15px; }
+  .note, .action, .rule-box { border-radius: 8px; padding: 14px 16px; margin: 16px 0 0; font-size: 15px; }
   .note { background: var(--tint); border-left: 4px solid var(--navy-light); }
-  .action { background: #FFF5F6; border-left: 4px solid var(--red); }
+  .action { background: var(--red-tint); border-left: 4px solid var(--red); }
+  .rule-box { background: var(--teal-tint); border-left: 4px solid var(--teal); }
   .label { display: block; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); margin-bottom: 4px; }
+  .note ul, .action ul, .rule-box ul { margin: 4px 0 0; padding-left: 20px; }
+  .note li, .action li, .rule-box li { margin-bottom: 4px; }
 
   /* ---------- Cards ---------- */
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .card { border: 1px solid #E1E7ED; border-top: 4px solid var(--navy); border-radius: 8px; padding: 16px; font-size: 15px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .card { border: 1px solid var(--rule); border-top: 4px solid var(--navy); border-radius: 8px; padding: 16px; font-size: 14.5px; }
+  .card.red { border-top-color: var(--red); }
+  .card.teal { border-top-color: var(--teal); }
+  .card.orange { border-top-color: #F2A43A; }
   .card h3 { margin: 0 0 8px; }
   .card p { margin-bottom: 8px; }
   .card p:last-child { margin-bottom: 0; }
-  .card .k { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy-mid); }
+  .card ul { margin: 0; padding-left: 18px; }
+  .card .k { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy-mid); }
+  a.card { display: block; text-decoration: none; color: inherit; transition: box-shadow .15s; }
+  a.card:hover { box-shadow: 0 6px 20px rgba(22,59,98,0.12); }
 
   /* ---------- Tables ---------- */
   .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  th { background: var(--navy); color: var(--paper); text-align: left; padding: 10px 12px; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
-  td { padding: 10px 12px; border-bottom: 1px solid #E1E7ED; vertical-align: top; }
-  td:first-child { font-weight: 700; color: var(--navy); min-width: 150px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th { background: var(--navy); color: var(--paper); text-align: left; padding: 10px 12px; font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  td:first-child { font-weight: 700; color: var(--navy); min-width: 140px; }
+  tr.group td { background: var(--tint); color: var(--navy-mid); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px; }
+
+  /* ---------- Tags ---------- */
+  .tag { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; padding: 2px 9px; border-radius: 999px; white-space: nowrap; vertical-align: 1px; }
+  .tag.auto { background: var(--teal-tint); color: var(--teal-dark); }
+  .tag.manual { background: var(--red-tint); color: var(--red); }
+  .tag.client { background: var(--orange-tint); color: var(--orange); }
+  .tag.internal { background: #E7EDF4; color: var(--navy); }
+  .tag.planned { background: #F1F1F1; color: #666; }
+  .tag.hs { background: #FFF1E6; color: #C2410C; border: 1px solid #FBD5B5; }
+  .tag.sap { background: #EAF6EC; color: #1F7A34; border: 1px solid #BFE3C6; }
+  .tag.web { background: #EEF2F7; color: var(--navy); border: 1px solid #CED8E3; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13.5px; color: var(--navy-mid); margin: 0 0 18px; }
+  .code { font-weight: 700; font-family: ui-monospace, Menlo, monospace; font-size: 13px; }
+
+  /* ---------- Pipeline stages ---------- */
+  .stage { border: 1px solid var(--rule); border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+  .stage-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; background: var(--tint); border-bottom: 1px solid var(--rule); }
+  .stage-num { width: 34px; height: 34px; border-radius: 8px; background: var(--navy); color: var(--paper); display: grid; place-items: center; font-weight: 800; font-size: 16px; flex: none; }
+  .stage.lost .stage-num { background: var(--red); }
+  .stage.won .stage-num { background: var(--teal-dark); }
+  .stage.pre .stage-num { background: var(--navy-light); }
+  .stage-head h3 { margin: 0; font-size: 16px; flex: 1 1 auto; }
+  .stage-head .where { display: flex; gap: 6px; flex-wrap: wrap; }
+  .stage-body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stage-col { padding: 14px 16px; font-size: 14px; border-right: 1px solid var(--rule); }
+  .stage-col:last-child { border-right: 0; }
+  .stage-col .col-title { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .stage-col.c-auto .col-title { color: var(--teal-dark); }
+  .stage-col.c-hmd .col-title { color: var(--red); }
+  .stage-col.c-notify .col-title { color: var(--orange); }
+  .stage-col ul { margin: 0; padding-left: 18px; }
+  .stage-col li { margin-bottom: 6px; }
+  .stage-col .none { color: var(--navy-light); font-style: italic; }
+  .stage-col.c-hmd { background: #FFFBFB; }
+
+
+  /* ---------- Flow strip ---------- */
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 4px 0 8px; }
+  .flow span { background: var(--tint); border: 1px solid var(--rule); border-radius: 6px; padding: 6px 10px; font-size: 13px; font-weight: 700; color: var(--navy); }
+  .flow i { color: var(--navy-light); font-style: normal; }
+  .flow span.won { background: var(--teal-tint); border-color: var(--teal-light); color: var(--teal-dark); }
+  .flow span.lost { background: var(--red-tint); border-color: #F8C4CB; color: var(--red); }
 
   /* ---------- Checklist ---------- */
   .checklist { list-style: none; margin: 0; padding: 0; }
-  .checklist li { padding: 10px 0 10px 32px; border-bottom: 1px solid #E1E7ED; position: relative; }
+  .checklist li { padding: 10px 0 10px 32px; border-bottom: 1px solid var(--rule); position: relative; }
   .checklist li::before { content: ""; position: absolute; left: 0; top: 13px; width: 16px; height: 16px; border: 2px solid var(--teal); border-radius: 4px; }
 
   /* ---------- Footer ---------- */
-  footer { text-align: center; font-size: 13px; color: var(--navy-mid); padding: 16px; }
+  footer { text-align: center; font-size: 13px; color: var(--navy-mid); padding: 8px 16px 32px; }
 
   /* ---------- Small screens ---------- */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .sidebar { position: static; max-height: none; padding: 12px; }
+    .sidebar ol { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+    .sidebar a { white-space: nowrap; border-left: 0; border-bottom: 3px solid transparent; }
+    .sidebar a.active { border-bottom-color: var(--red); }
+    .stage-body { grid-template-columns: minmax(0, 1fr); }
+    .stage-col { border-right: 0; border-bottom: 1px solid var(--rule); }
+    .stage-col:last-child { border-bottom: 0; }
+  }
   @media (max-width: 600px) {
-    .toc ol { columns: 1; }
-    section { padding: 22px 16px; }
+    section, .panel-head { padding: 22px 16px; }
   }
 
-  /* ---------- Print / Save as PDF ---------- */
+  /* ---------- Print / Save as PDF: every tab, no menus ---------- */
   @media print {
-    body { background: #fff; font-size: 13px; }
-    .cover, th, .steps li::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .cover { page-break-after: always; }
-    .toc { box-shadow: none; margin-top: 0; }
-    section { padding: 16px 0; break-inside: auto; }
-    .card, .note, .action, tr, .steps li { break-inside: avoid; }
+    body { background: #fff; font-size: 12px; }
+    .tabbar, .sidebar { display: none !important; }
+    .layout { display: block; padding: 0; }
+    .tab-panel { display: block !important; break-before: page; }
+    .cover, .panel-head, th, .steps li::before, .stage-num, .tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { padding: 14px 0; }
+    .card, .note, .action, .rule-box, tr, .steps li, .stage { break-inside: avoid; }
   }
 </style>
 </head>
@@ -134,162 +230,283 @@
   <div class="cover-inner">
     <div class="cover-top">
       <div class="logo" role="img" aria-label="Invocom"></div>
-      <div>Sales operations · 05 October 2026</div>
+      <div>HMD operations · Version 2 · 26 October 2026</div>
     </div>
-
-    <div class="eyebrow">HMD · Sales team guide</div>
-    <h1>Handling website requests</h1>
-    <p class="sub">What happens when a customer submits a request on the HMD website, and what you do next.</p>
+    <div class="eyebrow">HMD · Team guide</div>
+    <h1>Website, HubSpot and SAP</h1>
+    <p class="sub">How website requests become deals, how each deal moves through its pipeline, and when the client and the team are notified.</p>
     <div class="rule"></div>
-
     <div class="meta">
-      <div><span>For</span>HMD sales team</div>
+      <div><span>For</span>HMD sales, parts, service, finance and logistics teams</div>
       <div><span>Prepared by</span>Invocom</div>
+      <div><span>Replaces</span>Sales team guide of 05 October 2026</div>
     </div>
   </div>
 </header>
 
-<div class="page">
+<!-- ================= TABS ================= -->
+<nav class="tabbar" aria-label="Guide chapters">
+  <div class="tabbar-inner" role="tablist">
+    <button role="tab" data-tab="overview">Overview</button>
+    <button role="tab" data-tab="website">Website &amp; HubSpot</button>
+    <button role="tab" data-tab="machinery"><span class="dot" style="background:var(--navy)"></span>Machinery</button>
+    <button role="tab" data-tab="parts"><span class="dot" style="background:var(--red)"></span>Spare Parts</button>
+    <button role="tab" data-tab="rental"><span class="dot" style="background:var(--teal)"></span>Rental</button>
+    <button role="tab" data-tab="maintenance"><span class="dot" style="background:#F2A43A"></span>Maintenance</button>
+    <button role="tab" data-tab="notifications">Notifications</button>
+    <button role="tab" data-tab="help">Help</button>
+  </div>
+</nav>
 
-  <!-- ================= CONTENTS ================= -->
-  <nav class="toc">
-    <ol>
-      <li><a href="#start">How a request starts</a></li>
-      <li><a href="#types">The four request types</a></li>
-      <li><a href="#deal">What you find on the deal</a></li>
-      <li><a href="#customer">Contact and company</a></li>
-      <li><a href="#owner">Who owns the deal</a></li>
-      <li><a href="#sap">Sending the deal to SAP</a></li>
-      <li><a href="#status">Order updates from SAP</a></li>
-      <li><a href="#problems">If something goes wrong</a></li>
-    </ol>
-  </nav>
+<div class="layout">
 
-<!-- ================= 1 ================= -->
-  <section id="start">
-    <h2><span class="num">1</span>How a request starts</h2>
-    <p class="lead">Every request begins on the HMD website.</p>
+  <aside class="sidebar" aria-label="Sections in this tab">
+    <div class="side-title" id="side-title">In this tab</div>
+    <ol id="side-list"></ol>
+  </aside>
 
-    <ol class="steps">
-      <li>The customer adds items to the cart from <strong>Buy</strong>, <strong>Rental</strong> or <strong>Spare Parts</strong>, or opens a <strong>Maintenance</strong> request.</li>
-      <li>For Buy, Rental and Spare Parts, they fill in their contact, company, country and industry details at checkout.</li>
-      <li>Spare Parts also has a <strong>Bulk / Quick Order</strong> option, where the customer types or uploads a list of parts.</li>
-      <li>Maintenance uses the Aftersales form. The customer describes the machine and the issue.</li>
-      <li>A mixed cart is split. One checkout with Buy, Rental and Spare Parts items creates a separate request and a separate deal for each.</li>
-    </ol>
+  <main>
 
-    <div class="note">
-      <span class="label">The result</span>
-      A deal is created in HubSpot with all the linked information: the customer, the company and the requested items.
+<!-- =====================================================================
+     TAB 1 · OVERVIEW
+     ===================================================================== -->
+<div class="tab-panel" id="overview" data-title="Overview">
+
+  <div class="panel-head">
+    <div class="eyebrow">Start here</div>
+    <h2>The big picture</h2>
+    <p>Every request starts on the HMD website, lives as a deal in HubSpot, and turns into documents in SAP. Most of the movement between them is automatic.</p>
+  </div>
+
+  <section id="ov-guide">
+    <h2>How to use this guide</h2>
+    <p class="lead">Each tab covers one part of the process. The menu on the left lists the sections of the tab you are in.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Tab</th><th>Read it when</th></tr>
+        <tr><td>Website &amp; HubSpot</td><td>You want to know what the customer fills in, what you find on a deal, who owns it and which HMD company it belongs to.</td></tr>
+        <tr><td>Machinery · Spare Parts · Rental · Maintenance</td><td>You work deals in that pipeline. Each tab shows the stages, what happens by itself, what you do and who is notified.</td></tr>
+        <tr><td>Notifications</td><td>You want one list of every email, WhatsApp message, task and alert, and when it goes out.</td></tr>
+        <tr><td>Help</td><td>Something looks wrong, or you meet a word you do not know.</td></tr>
+      </table>
     </div>
-
-    <div class="note">
-      <span class="label">The deal form</span>
-      The deal form in HubSpot follows the deal's pipeline. It shows the information needed for that type of deal: Buy, Rental, Spare Parts or Maintenance.
+    <h3>Labels used in this guide</h3>
+    <div class="legend">
+      <span><span class="tag auto">⚡ Automatic</span> happens by itself</span>
+      <span><span class="tag manual">✎ You do</span> a person on the HMD team acts</span>
+      <span><span class="tag client">Client</span> message to the customer</span>
+      <span><span class="tag internal">Team</span> message or task for HMD</span>
+      <span><span class="tag planned">Planned</span> agreed, not switched on yet</span>
     </div>
   </section>
 
-  <!-- ================= 2 ================= -->
-  <section id="types">
-    <h2><span class="num">2</span>The four request types</h2>
-    <p class="lead">Each type lands in its own HubSpot pipeline. No salesperson approval happens before the deal is created.</p>
-
+  <section id="ov-systems">
+    <h2>The three systems</h2>
+    <p class="lead">You work in HubSpot. The website feeds it and SAP holds the official documents. Invocom keeps the three in sync.</p>
     <div class="cards">
       <article class="card">
-        <h3>Buy</h3>
-        <p><span class="k">What happens</span>A deal is created with the customer, company and requested items. If prices are available, the Amount is filled in USD.</p>
-        <p><span class="k">You check</span>Prices, items, shipping details and the customer's preferred contact channel.</p>
+        <h3>Website <span class="tag web">Website</span></h3>
+        <p>Where the customer browses machines and parts, fills the cart or a form, and submits the request.</p>
+        <p><span class="k">Creates</span>The request reference, the contact, the company and the deal.</p>
       </article>
-
-      <article class="card">
-        <h3>Rental</h3>
-        <p><span class="k">What happens</span>A separate deal is created in the Rental pipeline. The request starts as Pending. No price is calculated.</p>
-        <p><span class="k">You check</span>Availability, rental dates, rental type, estimated hours, requested services and delivery address.</p>
+      <article class="card orange">
+        <h3>HubSpot <span class="tag hs">HubSpot</span></h3>
+        <p>Where every deal lives and where the team works: stages, tasks, notes, emails to the client.</p>
+        <p><span class="k">You use it to</span>Follow the deal, talk to the client and move the stage.</p>
       </article>
-
-      <article class="card">
-        <h3>Spare Parts — cart</h3>
-        <p><span class="k">What happens</span>A deal is created in the Spare Parts pipeline with each part as an item. Any uploaded parts list is attached.</p>
-        <p><span class="k">You check</span>Part codes, quantities, pricing, compatibility, pickup or delivery, carrier and address.</p>
-      </article>
-
-      <article class="card">
-        <h3>Spare Parts — Bulk / Quick Order</h3>
-        <p><span class="k">What happens</span>A new deal is created with the parts list and files. Items have no prices.</p>
-        <p><span class="k">You check</span>The full list, duplicate rows, files, missing prices, and attach the right company.</p>
-      </article>
-
-      <article class="card">
-        <h3>Maintenance</h3>
-        <p><span class="k">What happens</span>A deal is created in the Maintenance pipeline with a full request note. There are no item rows.</p>
-        <p><span class="k">You check</span>Urgency, machine model, serial number, the issue, whether the machine is running, service needed and files.</p>
+      <article class="card teal">
+        <h3>SAP <span class="tag sap">SAP</span></h3>
+        <p>Where the official documents are made: proforma invoice (PI), sales order, invoice, payment, delivery note.</p>
+        <p><span class="k">Sends back</span>Each document number, total and status to the deal automatically.</p>
       </article>
     </div>
-
-    <h3>Quotations</h3>
-    <p>The customer can ask to be contacted by <strong>WhatsApp</strong>, <strong>Email</strong> or both. WhatsApp is used if they choose nothing.</p>
     <div class="note">
-      <span class="label">How quotations are sent</span>
-      Machinery quotations are sent by a separate HubSpot process. When a quotation is sent, a notification arrives to the user.
-    </div>
-
-    <div class="action">
-      <span class="label">What you do</span>
-      Open the right deal, review it, and contact the customer to clarify or price the request. Before sending a quotation, check that one has not already gone out.
+      <span class="label">Who does what</span>
+      <ul>
+        <li><b>Invocom</b>: the automations that connect the website, HubSpot and SAP. You never need to copy data between systems.</li>
+        <li><b>HMD team</b>: talks to the client, prices, approves, delivers. The deal owner leads each deal.</li>
+        <li><b>SAP team / finance</b>: creates and closes the documents in SAP, records payments, issues invoices and delivery notes.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- ================= 3 ================= -->
-  <section id="deal">
-    <h2><span class="num">3</span>What you find on the deal</h2>
-    <p class="lead">The website fills these in for you. The deal form shows the fields that match the deal's pipeline.</p>
+  <section id="ov-pipelines">
+    <h2>The four pipelines</h2>
+    <p class="lead">Each type of request lands in its own HubSpot pipeline. A mixed cart is split: one deal per type.</p>
+    <div class="cards">
+      <a class="card" href="#machinery">
+        <h3>Machinery</h3>
+        <p><span class="k">From</span>Buy cart on the website</p>
+        <p><span class="k">Starts with</span>A quote emailed to the client at once</p>
+        <p><span class="k">Ends with</span>Delivery of the machine</p>
+      </a>
+      <a class="card red" href="#parts">
+        <h3>Spare Parts</h3>
+        <p><span class="k">From</span>Parts cart, or Bulk / Quick Order</p>
+        <p><span class="k">Starts with</span>A draft PI in SAP for the parts team to price</p>
+        <p><span class="k">Ends with</span>Signed delivery note</p>
+      </a>
+      <a class="card teal" href="#rental">
+        <h3>Rental</h3>
+        <p><span class="k">From</span>Rental cart on the website</p>
+        <p><span class="k">Starts with</span>A discovery call with the client</p>
+        <p><span class="k">Ends with</span>Machine delivered on rent</p>
+      </a>
+      <a class="card orange" href="#maintenance">
+        <h3>Maintenance</h3>
+        <p><span class="k">From</span>Aftersales / maintenance form</p>
+        <p><span class="k">Starts with</span>Service team notified, discovery call</p>
+        <p><span class="k">Ends with</span>All inspection reports done, case closed</p>
+      </a>
+    </div>
+  </section>
 
+  <section id="ov-life">
+    <h2>A deal's life in one line</h2>
+    <p class="lead">The names change by pipeline, but every deal follows the same shape.</p>
+    <div class="flow">
+      <span>Request on website</span><i>→</i><span>Deal in HubSpot</span><i>→</i><span>Quote / PI</span><i>→</i><span>Client confirms</span><i>→</i><span>Sales order in SAP</span><i>→</i><span>Payment</span><i>→</i><span class="won">Delivered · Closed Won</span>
+    </div>
+    <div class="flow">
+      <span>Any stage</span><i>→</i><span class="lost">Closed Lost</span><i>→</i><span>Open SAP documents closed</span>
+    </div>
+    <div class="rule-box">
+      <span class="label">Three rules for everyone</span>
+      <ul>
+        <li><b>The deal is the single source of truth.</b> Check it before you call the client. SAP updates arrive on it by themselves.</li>
+        <li><b>Never create a second deal or a second PI</b> for the same request. Repair or amend the existing one.</li>
+        <li><b>Move stages only as this guide says.</b> Some stage moves send emails to the client or create documents in SAP.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ov-new">
+    <h2>What changed since the last guide</h2>
+    <p class="lead">Version 2 replaces the sales team guide of 05 October 2026.</p>
+    <ul class="checklist">
+      <li><b>Deal owner rules are new.</b> Rental has one dedicated owner. Machinery and parts first keep the client's existing owner. See <a href="#web-owner">Who owns the deal</a>.</li>
+      <li><b>The HMD company is set automatically</b> from the destination country. You no longer pick it by hand. See <a href="#web-entity">Which HMD company</a>.</li>
+      <li><b>Spare parts is fully automated</b>, from pricing to delivery, with ten client emails and team alerts. See the <a href="#parts">Spare Parts tab</a>.</li>
+      <li><b>The spare parts form asks more</b>: urgency, machine-down photo, branch collection or port, tax ID.</li>
+      <li><b>SAP documents open from the deal.</b> PI, sales order, invoice, delivery note and receipt each have a View button. See <a href="#web-docs">Documents</a>.</li>
+      <li><b>Maintenance requests</b> go to the Aftersales pipeline with their own owners per country.</li>
+      <li><b>Machinery PIs are created in SAP at Order Confirmation</b>, not when the deal is created.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB 2 · WEBSITE & HUBSPOT
+     ===================================================================== -->
+<div class="tab-panel" id="website" data-title="Website &amp; HubSpot">
+
+  <div class="panel-head">
+    <div class="eyebrow">Common to every pipeline</div>
+    <h2>From the website to a HubSpot deal</h2>
+    <p>What the customer submits, what the website creates for you, and how a deal is set up before anyone touches it.</p>
+  </div>
+
+  <section id="web-request">
+    <h2>How a request starts</h2>
+    <p class="lead">No salesperson approval happens before the deal is created.</p>
+    <ol class="steps">
+      <li>The customer adds items from <b>Buy</b>, <b>Rental</b> or <b>Spare Parts</b> to the cart, or opens a <b>Maintenance</b> request.</li>
+      <li>At checkout they give their contact details, company, country and industry, and how they want to be contacted: <b>WhatsApp</b>, <b>Email</b> or both. WhatsApp is used if they choose nothing.</li>
+      <li>Spare Parts also offers <b>Bulk / Quick Order</b>: the customer types or uploads a list of parts.</li>
+      <li>A mixed cart is split. One checkout with Buy, Rental and Spare Parts items creates a separate request and a separate deal for each.</li>
+      <li>The website creates the deal, links the contact and company, adds the items, and gives the request a reference.</li>
+      <li>About two minutes later the client gets a welcome message by their preferred channel.</li>
+    </ol>
+    <div class="note">
+      <span class="label">The deal form</span>
+      The deal form in HubSpot follows the pipeline. It shows only the fields that matter for Machinery, Rental, Spare Parts or Maintenance.
+    </div>
+  </section>
+
+  <section id="web-parts-form">
+    <h2>What the spare parts form asks</h2>
+    <p class="lead">The parts cart now collects what the parts team needs to price and ship.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Question</th><th>What it means for you</th></tr>
+        <tr><td>Destination country</td><td>Decides the HMD company and SAP database, the prices and, for a new client, the deal owner.</td></tr>
+        <tr><td>Collection or port</td><td>In <b>Ghana, Nigeria, Guinea and Benin</b> the client collects from the HMD branch: Tema, Lekki (Lagos), Alaro (Lekki Free Zone), Conakry or Cotonou. Other countries choose a destination port.</td></tr>
+        <tr><td>When do you need these parts?</td><td><b>Machine down</b>, within 1–2 weeks, or planned maintenance. Machine down sets the deal priority to <b>High</b> automatically.</td></tr>
+        <tr><td>Machine photo</td><td>Only for machine-down requests. A link to the photo is on the deal.</td></tr>
+        <tr><td>Tax ID</td><td>Saved as <b>Website tax ID</b> on the deal and the company. The company's official tax field is never changed.</td></tr>
+        <tr><td>Uploaded parts list</td><td>Bulk / Quick Order files are attached to the deal. Their lines have no prices yet.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="web-deal">
+    <h2>What you find on the deal</h2>
+    <p class="lead">The website fills these in for you.</p>
     <div class="table-wrap">
       <table>
         <tr><th>On the deal</th><th>What to know</th></tr>
         <tr><td>Deal name</td><td>Built from the request, the company and the first item code. Maintenance uses the machine model.</td></tr>
-        <tr><td>Deal owner</td><td>Chosen from the customer's country. See <a href="#owner">section 5</a>.</td></tr>
-        <tr><td>Close date</td><td>Set to 7 days after the request. This is not a delivery or service promise.</td></tr>
+        <tr><td>Order reference</td><td>The website request reference. Quote it in every conversation until a PI number exists.</td></tr>
+        <tr><td>Deal owner</td><td>See <a href="#web-owner">Who owns the deal</a>.</td></tr>
+        <tr><td>Entity Name</td><td>The HMD company and SAP database for this deal. See <a href="#web-entity">Which HMD company</a>.</td></tr>
+        <tr><td>Close date</td><td>Set to 7 days after the request. It is not a delivery or service promise.</td></tr>
         <tr><td>Currency and source</td><td>USD, and lead source "Website".</td></tr>
-        <tr><td>Order reference and Quotation number</td><td>Both show the website request reference. A filled Quotation number does not mean a quote exists.</td></tr>
-        <tr><td>Amount</td><td>Filled for Buy only, when prices are available. Rental, Spare Parts and Maintenance are not priced automatically.</td></tr>
-        <tr><td>Description</td><td>The customer's notes, contact preference, and rental or shipping details. For Maintenance, the full request summary.</td></tr>
-        <tr><td>Shipping details</td><td>Destination country, port and Incoterms when the customer chose them. Spare Parts also shows Delivery or Pick-up, and Air Freight, Sea Freight or DEAL. A DHL choice on the website shows as DEAL.</td></tr>
-        <tr><td>Items</td><td>Name, quantity, and unit price when there is one. Buy items include machine specifications. Bulk / Quick Order items say "Pricing to be confirmed".</td></tr>
-        <tr><td>Tuboshu ForLife</td><td>Shown as two rows: the machine and the coverage. On the coverage row, quantity is the hours and unit price is the hourly rate.</td></tr>
-        <tr><td>Maintenance details</td><td>Support level, priority, machine model, serial number, operating hours, ForLife membership, issue type, issue start date, running status, service needed, preferred time and file links.</td></tr>
+        <tr><td>Amount</td><td>Machinery: filled when website prices exist. Spare parts: filled from the PI once it exists in SAP, and kept in step with it. Rental and Maintenance are not priced automatically.</td></tr>
+        <tr><td>Description and notes</td><td>The customer's notes and contact preference. Rental dates, type, hours and services; part serial numbers; file links; the full Maintenance summary.</td></tr>
+        <tr><td>Shipping</td><td>Destination country, port and Incoterms when chosen. Spare parts also show branch collection or port.</td></tr>
+        <tr><td>Items</td><td>Name, quantity, unit price when there is one. Machinery items carry the machine specifications. Bulk / Quick Order items say "Pricing to be confirmed". Tuboshu ForLife shows two rows: the machine and the coverage (quantity = hours, price = hourly rate).</td></tr>
+        <tr><td>SAP numbers</td><td>PI number, sales order number, invoice number, delivery note and payment reference arrive here from SAP automatically.</td></tr>
       </table>
     </div>
-
-    <div class="note">
-      <span class="label">Look in the notes too</span>
-      Some details are saved as notes, not fields: rental dates, type, hours and services; part serial numbers and pickup branch; uploaded file links; and the Maintenance summary. If a Maintenance field is empty, the answer is usually in the summary.
-    </div>
-
     <div class="action">
       <span class="label">What you do</span>
-      Check the deal fields and the notes. Confirm every requested item is there and priced correctly. An empty field does not mean the customer left it blank.
+      Check the fields <b>and</b> the notes. Some details are saved as notes, not fields. An empty field does not mean the customer left it blank.
     </div>
   </section>
 
-  <!-- ================= 4 ================= -->
-  <section id="customer">
-    <h2><span class="num">4</span>Contact and company</h2>
+  <section id="web-contact">
+    <h2>Contact and company</h2>
     <p class="lead">The website links each deal to a contact and, in most cases, a company.</p>
-
     <ol class="steps">
-      <li><strong>Contacts are matched by email only.</strong> The same person using a different email becomes a new contact.</li>
-      <li><strong>Cart and Maintenance requests</strong> create the contact if it is new, or update the existing one with the latest name, phone, company and country.</li>
-      <li><strong>Companies are matched by name.</strong> An existing company is reused as it is. A new company is created as a Prospect, with the same owner as the deal.</li>
+      <li><b>Contacts are matched by email only.</b> The same person with a different email becomes a new contact.</li>
+      <li>An existing contact is updated with the latest name, phone, company, country and preferred channel.</li>
+      <li><b>Companies are matched by name.</b> An existing company is reused as it is: its owner and type never change.</li>
+      <li>A new company is created as a <b>Prospect</b>. A new contact gets the company owner, lead source "Website", contact type "Prospect" and status "Trying to contact".</li>
     </ol>
-
+    <div class="note">
+      <span class="label">Preferred channel belongs to the contact</span>
+      If the same client orders again and picks a different channel, the new choice is used from then on, for all their deals.
+    </div>
   </section>
 
-  <!-- ================= 5 ================= -->
-  <section id="owner">
-    <h2><span class="num">5</span>Who owns the deal</h2>
-    <p class="lead">The owner is set by the customer's country, not the shipping destination.</p>
-
+  <section id="web-owner">
+    <h2>Who owns the deal</h2>
+    <p class="lead">The owner is chosen by pipeline. For machinery and spare parts the client's existing owner always comes first.</p>
+    <div class="cards">
+      <article class="card">
+        <h3>Machinery and Spare Parts</h3>
+        <ol class="steps" style="margin:8px 0 0">
+          <li>The owner of the existing <b>contact</b>.</li>
+          <li>Otherwise the owner of the existing <b>company</b>.</li>
+          <li>Otherwise the owner for the customer's <b>country</b> (table below).</li>
+        </ol>
+      </article>
+      <article class="card teal">
+        <h3>Rental</h3>
+        <p>Always the dedicated rental owner, whatever the country.</p>
+        <p><span class="k">Rental owner</span>Sampson Amaning</p>
+      </article>
+      <article class="card orange">
+        <h3>Maintenance</h3>
+        <p>The aftersales owner for the customer's country.</p>
+        <ul>
+          <li>Ghana: Ismail Abdelghani</li>
+          <li>Guinea: Hikmat Khalil</li>
+          <li>Nigeria and all other countries: Hassan Ayoub</li>
+        </ul>
+      </article>
+    </div>
+    <h3>Country owners (Machinery and Spare Parts, new clients)</h3>
     <div class="table-wrap">
       <table>
         <tr><th>Customer country</th><th>Deal owner</th></tr>
@@ -301,78 +518,957 @@
         <tr><td>All other countries</td><td>Tony El Khoury</td></tr>
       </table>
     </div>
-  </section>
-
-  <!-- ================= 6 ================= -->
-  <section id="sap">
-    <h2><span class="num">6</span>Sending the deal to SAP</h2>
-    <p class="lead">SAP is linked to HubSpot. Moving a deal to <strong>Order Confirmation</strong> creates the quote in SAP.</p>
-
-    <ol class="steps">
-      <li>Check the customer and company, items, quantities, agreed prices, currency and delivery details.</li>
-      <li>Set the <strong>Source company</strong> field. The quote is created under the company selected there. <b>Metamac</b> is the default.</li>
-      <li>Move the deal stage to <strong>Order Confirmation</strong>.</li>
-      <li>The quote is created in SAP automatically, using the deal's information and its source company.</li>
-    </ol>
-
-    <div class="action">
-      <span class="label">What you do</span>
-      Review the deal, confirm the Source company is right, then move the deal to Order Confirmation.
+    <div class="note">
+      <span class="label">Why it matters</span>
+      Client emails are sent in the name of the contact owner, and replies go to them. Keep the contact owner and the deal owner the same person.
     </div>
   </section>
 
-  <!-- ================= 7 ================= -->
-  <section id="status">
-    <h2><span class="num">7</span>Order updates from SAP</h2>
-    <p class="lead">SAP sends each order status change to HubSpot automatically.</p>
-
-    <ol class="steps">
-      <li>When the order status changes in SAP, HubSpot is updated through a webhook. You do nothing.</li>
-      <li>The current status appears in the <strong>card at the top right of the deal page</strong>.</li>
-    </ol>
-
+  <section id="web-entity">
+    <h2>Which HMD company (entity)</h2>
+    <p class="lead">HubSpot sets the Entity Name from the destination country. It decides the SAP database, the PI template and the company name the client sees in emails.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Destination country</th><th>HMD company</th><th>SAP database</th></tr>
+        <tr><td>Nigeria · Machinery</td><td>HMD FZE</td><td>HMD_FTZ_LIVE</td></tr>
+        <tr><td>Nigeria · everything else</td><td>Heavy Machinery Dealership Ltd</td><td>HMD_NIGERIA_LIVE</td></tr>
+        <tr><td>Ghana</td><td>HMD Ghana Ltd</td><td>HMD_FOREWIN_LIVE</td></tr>
+        <tr><td>Guinea</td><td>HEDA SARLU</td><td>HEDA_SARLU</td></tr>
+        <tr><td>All other countries</td><td>Metamac Trading L.L.C.</td><td>HMD_METAMAC</td></tr>
+      </table>
+    </div>
     <div class="action">
       <span class="label">What you do</span>
-      Open the deal and read the order status card at the top right before you update the customer.
+      Before a PI or sales order is created, check the Entity Name is right. If the client will be invoiced by a different HMD company, change it on the deal first.
     </div>
   </section>
 
-  <!-- ================= 8 ================= -->
-  <section id="problems">
-    <h2><span class="num">8</span>If something goes wrong</h2>
-    <p class="lead">An error does not mean nothing was saved. Always check before asking the customer to submit again.</p>
+  <section id="web-docs">
+    <h2>Documents and order status</h2>
+    <p class="lead">You never upload SAP documents to HubSpot. They open from the deal.</p>
+    <ol class="steps">
+      <li>Open the deal. The <b>order card</b> at the top right shows the current SAP status and every document for the deal.</li>
+      <li>Click <b>View</b> next to a document: proforma invoice, sales order, invoice, delivery note or payment receipt.</li>
+      <li>The document opens in HMD's design for that company. To send or keep a copy, use the browser's <b>Print → Save as PDF</b>.</li>
+    </ol>
+    <div class="note">
+      <span class="label">Good to know</span>
+      <ul>
+        <li>The <b>Proforma Invoice (PI)</b> is the SAP <b>Sales Quotation</b>. The PI number on the deal is that quotation number.</li>
+        <li>Client emails carry a link to the PI or receipt, not an attachment.</li>
+        <li>Every change to an open PI in SAP updates the deal's lines and total automatically.</li>
+      </ul>
+    </div>
+  </section>
 
+  <section id="web-sap">
+    <h2>Sending a deal to SAP</h2>
+    <p class="lead">SAP is linked to HubSpot. You never type a deal into SAP.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Pipeline</th><th>When the PI is created in SAP</th><th>When the sales order is created</th></tr>
+        <tr><td>Machinery</td><td>When the deal moves to <b>Order Confirmation</b>.</td><td>SAP team converts the PI.</td></tr>
+        <tr><td>Rental</td><td>When the deal moves to <b>Order Confirmation (Rental Approved)</b>.</td><td>SAP team converts the PI.</td></tr>
+        <tr><td>Spare Parts</td><td>Automatically, a few minutes after the request arrives, as a <b>draft</b> for the parts team to price.</td><td>When the deal moves to <b>Order Confirmation</b>.</td></tr>
+        <tr><td>Maintenance</td><td>When the client approves the service quotation.</td><td>SAP team creates the service order.</td></tr>
+      </table>
+    </div>
+    <div class="action">
+      <span class="label">What you do</span>
+      Before the move that creates a document, check the client, company, items, quantities, agreed prices and Entity Name. Each deal has one PI. Changes are made on that same PI.
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB 3 · MACHINERY
+     ===================================================================== -->
+<div class="tab-panel" id="machinery" data-title="Machinery">
+
+  <div class="panel-head">
+    <div class="eyebrow">Pipeline A</div>
+    <h2>Machinery pipeline</h2>
+    <p>Buying a machine: an instant quote, the client's answer, the SAP order, payment, customs, inspection and delivery.</p>
+  </div>
+
+
+  <section id="mach-stages">
+    <h2>Stage by stage</h2>
+    <p class="lead">What happens by itself, what the HMD team does, and who is notified.</p>
+    <div class="flow"><span>1 Quote Sent</span><i>→</i><span>2 Negotiation</span><i>→</i><span>3 Order Sent</span><i>→</i><span>4 Order Confirmation</span><i>→</i><span>5 Proforma Sent</span><i>→</i><span>6 Payment</span><i>→</i><span>7 Customs</span><i>→</i><span>8 PDI</span><i>→</i><span class="won">9 Delivered</span></div>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">1</div><h3>Quote Sent</h3><div class="where"><span class="tag web">Website</span><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>The deal, contact and company are created with the website reference.</li>
+          <li>A quote is built in HubSpot from the cart and emailed to the client.</li>
+          <li>The client can <b>accept</b>, <b>accept and upload a PO</b>, or <b>request changes</b>.</li>
+          <li>No answer: reminders on days 7, 14 and 24. Still no answer: the deal moves to <b>Closed Lost</b>.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Deal owner: review the quote and follow the client's answer.</li>
+          <li>Check a quote has not already gone out before sending another.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">Client</span> Welcome message (WhatsApp or email).</li>
+          <li><span class="tag client">Client</span> Quote email, then reminders.</li>
+          <li><span class="tag internal">Team</span> Deal owner: new deal assigned.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">2</div><h3>Negotiation</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The client's change request reaches the deal owner.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Discuss price and specifications with the client.</li>
+          <li>Agreed: move to <b>Order Sent</b>. Refused: move to <b>Closed Lost</b> with a reason.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag internal">Team</span> Deal owner: client asked for changes.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">3</div><h3>Order Sent</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>Reached when the client accepts the quote.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Check items, agreed prices, delivery terms and the <b>Entity Name</b>.</li>
+          <li>Move the deal to <b>Order Confirmation</b>.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">4</div><h3>Order Confirmation</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>The PI (sales quotation) is created in SAP under the deal's company. Its number comes back to the deal.</li>
+          <li>When SAP converts it to a sales order, the order number is stored on the deal.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Review the order reference on the deal and confirm the order with the client.</li>
+          <li>SAP team: confirm availability and convert to a sales order.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Order confirmation email.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">5</div><h3>Proforma Invoice Sent</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>SAP generates the proforma from the order.</li>
+          <li>After finance approval, the client gets the proforma with payment instructions.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Finance and operations: check amounts, terms and client details in the HubSpot task, then approve.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag internal">Team</span> Finance: approval task.</li>
+          <li><span class="tag client">Client</span> Proforma and payment instructions.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">6</div><h3>Payment Received</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>When finance records the payment in SAP, the deal moves here with the payment reference and amount.</li>
+          <li>If the machine is in stock, the deal skips customs and goes to Pre-Delivery Inspection.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Finance: record each payment (or instalment) in SAP against the order, then confirm receipt and next steps with the client.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Payment confirmation.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">7</div><h3>Customs Clearance</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>When SAP records clearance as complete, the deal moves to "Customs clearance done".</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Logistics: customs documents, duties and the freight forwarder.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Only for products sold from HMD FZE</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">8</div><h3>Pre-Delivery Inspection (PDI)</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>When the PDI is passed in SAP, the deal moves on and the PDI report link is stored on it.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Technical team: inspect the machine against the delivery checklist, test all functions, check serial numbers.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag internal">Team</span> HMD: PDI passed.</li><li><span class="tag client">Client</span> PDI passed.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage won">
+      <div class="stage-head"><div class="stage-num">9</div><h3>Delivered · Closed Won</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The delivery note in SAP closes the deal as <b>Closed Won</b>. Delivery documents go to the client.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Logistics: deliver the machine to the agreed place.</li><li>Warehouse: dispatch and issue the delivery note in SAP.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Delivery documents.</li><li><span class="tag internal">Team</span> All parties: deal closed.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage lost">
+      <div class="stage-head"><div class="stage-num">10</div><h3>Closed Lost</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The open PI in SAP is closed. A quote with no answer after the reminders is closed lost by itself.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Deal owner: move the deal to Closed Lost with a reason.</li><li>SAP team: cancel the sales order if one was created.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody</li></ul></div>
+      </div>
+    </article>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB 4 · SPARE PARTS
+     ===================================================================== -->
+<div class="tab-panel" id="parts" data-title="Spare Parts">
+
+  <div class="panel-head">
+    <div class="eyebrow">Pipeline B</div>
+    <h2>Spare Parts pipeline</h2>
+    <p>The most automated pipeline. The parts team prices a draft PI, HubSpot sends it, reminds, follows the order, payment and delivery, and closes what goes silent.</p>
+  </div>
+
+
+  <section id="sp-roles">
+    <h2>Who is involved</h2>
+    <p class="lead">Each role has a clear part. The salesperson is the only contact with the client.</p>
+    <div class="cards">
+      <article class="card red">
+        <h3>Deal owner (salesperson)</h3>
+        <p>The only person who talks to the client. Answers the pricing team's questions, follows up the PI, agrees changes, moves the deal to Order Confirmation.</p>
+      </article>
+      <article class="card">
+        <h3>Parts pricing team (Parts Executives)</h3>
+        <p>Prices and amends the PI in SAP for its entity.</p>
+        <ul>
+          <li>Nigeria and FZE: HMD Nigeria Maintenance &amp; Spare Parts</li>
+          <li>Ghana: HMD Ghana Maintenance &amp; Spare Parts</li>
+          <li>Guinea and Metamac: Rania El Khoury for now</li>
+        </ul>
+      </article>
+      <article class="card teal">
+        <h3>Head of Sales</h3>
+        <p>Rania El Khoury for now. Receives the 48-hour pricing escalation and decides on credit line exemptions.</p>
+      </article>
+      <article class="card orange">
+        <h3>SAP team, finance and warehouse</h3>
+        <p>Convert the PI to a sales order, re-check stock and credit, register payments against the PI number, issue the invoice and the delivery note.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="sp-stages">
+    <h2>Stage by stage</h2>
+    <p class="lead">What happens by itself, what the HMD team does, and who is notified. C = client email, I = team alert.</p>
+    <div class="flow"><span>0 Intake</span><i>→</i><span>1 Order Submitted</span><i>→</i><span>3 Quote Sent</span><i>⇄</i><span>4 Negotiation</span><i>→</i><span>5 Order Confirmation</span><i>→</i><span>6 Payment Received</span><i>→</i><span>7 Invoice Issued</span><i>→</i><span class="won">8 Delivered</span></div>
+    <div class="flow"><span class="lost">2 Disqualify</span><i>→</i><span class="lost">9 Closed Lost</span></div>
+
+    <article class="stage pre">
+      <div class="stage-head"><div class="stage-num">0</div><h3>Inquiry intake</h3><div class="where"><span class="tag planned">No deal yet</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li class="none">Nothing</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Every parts request must come through the website. Emails to info@, direct emails to sales staff and WhatsApp (Rasayel) leads get a reply sending the customer to the <a href="https://hmd.invocom.me/spare-parts" target="_blank" rel="noopener">spare parts page</a>.</li>
+          <li>Do not create a parts deal by hand.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">1</div><h3>Order Submitted</h3><div class="where"><span class="tag web">Website</span><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>Deal, contact and company created; owner notified. The urgency from the cart is saved on the deal.</li>
+          <li>Machine down: deal priority set to <b>High</b>.</li>
+          <li>The client receives the request reference.</li>
+          <li>The Entity Name is set from the country, and a <b>draft PI</b> is created in that entity's SAP database with the requested parts. PI status = <b>Draft</b>.</li>
+          <li>Still unpriced after 24 h: the deal owner is alerted. After 48 h: the Head of Sales.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li><b>Parts pricing team:</b> check availability and price every line. Not in stock: look at the local market, an in-stock alternative that fits the machine, or the OEM price.</li>
+          <li><b>Metamac markets:</b> the OEM price is for shipment to the destination port; the customer clears the goods.</li>
+          <li>Finalise the PI in SAP within <b>24 h</b> (48 h if sourced), then set <b>PI status = Ready to send</b>.</li>
+          <li>Need information from the client? Write it in <b>Pricing question</b> on the deal. Never contact the client.</li>
+          <li><b>Deal owner:</b> answer the question with the client and add the answer to the deal.</li>
+          <li>Cannot supply: move the deal to <b>Disqualify</b>, within one working day.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">C1</span> Request received (email + WhatsApp).</li>
+          <li><span class="tag internal">I1</span> Parts team: new request to price (deal owner in copy).</li>
+          <li><span class="tag internal">I2</span> Pricing overdue: deal owner at 24 h, Head of Sales at 48 h.</li>
+          <li><span class="tag internal">I3</span> Deal owner: task "Ask client about request", due today.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage lost">
+      <div class="stage-head"><div class="stage-num">2</div><h3>Disqualify Order &amp; Reason</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>The client is told the parts are unavailable or out of scope.</li>
+          <li>The deal moves to Closed Lost with the reason "Unqualified – parts unavailable". The draft PI is closed in SAP.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Use only after the inquiry is found unqualified and existing suppliers have been checked.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">C2</span> We cannot supply this request.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">3</div><h3>Quote Sent</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>As soon as PI status is <b>Ready to send</b>: the deal moves to Quote Sent and the client gets the PI as a link. No PI is sent before the pricing team has checked it.</li>
+          <li>PI status becomes <b>Sent</b> and the PI sent date is stored.</li>
+          <li>Reminders on <b>day 7</b> and <b>day 14</b>, final reminder on <b>day 24</b>, only while the deal is still in Quote Sent.</li>
+          <li>No confirmation <b>30 days</b> after the PI: closed lost as "Unresponsive Contact".</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Deal owner: follow up within <b>2 business days</b>.</li>
+          <li>Client asks for changes: move the deal to <b>Negotiation</b>.</li>
+          <li>Client confirms: move the deal to <b>Order Confirmation</b>.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">C3</span> Your proforma invoice.</li>
+          <li><span class="tag internal">I4</span> Deal owner: follow-up task, due in 2 business days.</li>
+          <li><span class="tag client">C4</span> Reminder (day 7 and 14).</li>
+          <li><span class="tag client">C5</span> Final reminder (day 24).</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">4</div><h3>Negotiation</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>The deal owner gets a task and an alert. PI status = <b>Amendment requested</b>; the parts team is asked to amend the PI.</li>
+          <li>Each PI change in SAP syncs the lines and total back to the deal, so the deal always matches the PI the client receives.</li>
+          <li>When PI status is Ready to send again, the amended PI is emailed (C3) and the reminder count restarts.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Deal owner: discuss pricing, quantities and lead time with the client; write the agreed changes in the deal notes.</li>
+          <li>Parts team: change <b>the same PI</b> in SAP, never a new one. Then set PI status = Ready to send.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag internal">I5</span> Deal owner: client replied about the PI.</li>
+          <li><span class="tag internal">Team</span> Parts team: amend the PI.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">5</div><h3>Order Confirmation</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>Moving the deal to Order Confirmation asks SAP to create the sales order from the PI. The sales order number comes back to the deal.</li>
+          <li>Credit customers over their credit line: Credit exemption = <b>Pending</b>; Head of Sales alerted, reminded after 2 days.</li>
+          <li>Exemption <b>Approved</b>: deal owner told to release the order. <b>Rejected</b>: deal goes back to Negotiation.</li>
+          <li>Expected delivery date changes: client and deal owner are told.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Deal owner: review the reference and order details, then move the deal here.</li>
+          <li>SAP team: convert the PI to a sales order and check stock again, as a part may have been sold while the client was deciding. Tell the deal owner at once if anything is short.</li>
+          <li>Head of Sales: set <b>Credit exemption</b> to Approved or Rejected on the deal.</li>
+          <li>Rejected: deal owner asks the client to pay in advance or reduce the order.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">C6</span> Order confirmed (with expected delivery date).</li>
+          <li><span class="tag internal">I6</span> Parts team: order confirmed, re-check stock.</li>
+          <li><span class="tag internal">I7</span> Head of Sales: credit line exceeded.</li>
+          <li><span class="tag client">C8</span> + <span class="tag internal">I9</span> Delivery date changed.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">6</div><h3>Payment Received</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>Each payment registered in SAP moves the deal here and records the amount on the deal, including part payments.</li>
+          <li>The payment receipt is sent to the client as a link, and the deal owner is notified.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Finance: confirm the payment against the <b>PI number</b> and register it in SAP.</li>
+          <li>Deal owner: share the receipt only if it was not sent automatically.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">C7</span> Payment received, with receipt link.</li>
+          <li><span class="tag internal">I8</span> Deal owner: payment received, balance remaining.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">7</div><h3>Invoice Issued</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The SAP invoice is synced to the deal. The deal moves to Invoice Issued if it is not already past it.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Finance: issue the invoice against the sales order. It is not sent on payment: it is handed or emailed to the client with the goods on delivery.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody. No invoice email is sent.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage won">
+      <div class="stage-head"><div class="stage-num">8</div><h3>Delivered · Closed Won</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The delivery note in SAP moves the deal to Delivered and closes it as <b>Closed Won</b>.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Warehouse: pick the parts, issue the delivery note in SAP, dispatch with the invoice.</li>
+          <li>The client receives the parts and the invoice, and signs the delivery note.</li>
+          <li>Deal owner: a good moment to ask about the next service or parts need.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">C9</span> Delivered, thank you.</li>
+          <li><span class="tag internal">I10</span> Deal owner: delivered and closed won.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage lost">
+      <div class="stage-head"><div class="stage-num">9</div><h3>Closed Lost</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>Every open PI for the deal is closed in SAP; the sales order is cancelled if one was created.</li>
+          <li><b>Automatic close after one month:</b> a deal not confirmed 30 days after the PI was sent, or never priced 30 days after the request, moves to Closed Lost as "Unresponsive Contact", with C10.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Deal owner: move the deal to Closed Lost with the reason in HubSpot.</li>
+          <li>SAP team: close the PI and cancel the sales order if it was not done automatically.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">C10</span> Request closed (auto-close only).</li>
+          <li><span class="tag planned">Planned</span> I11 Deal closed, to deal owner and parts team.</li>
+        </ul></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="sp-fields">
+    <h2>Fields the team sets</h2>
+    <p class="lead">These fields drive the automation. Setting one is how you tell HubSpot the next step is ready.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Field on the deal</th><th>Who sets it</th><th>What happens</th></tr>
+        <tr><td>PI status → Ready to send</td><td>Parts team</td><td>The PI is emailed to the client (C3), the deal moves to Quote Sent, reminders start.</td></tr>
+        <tr><td>Pricing question</td><td>Parts team</td><td>The deal owner gets a task due today to ask the client (I3). Writing a new question creates a new task.</td></tr>
+        <tr><td>Deal stage → Negotiation</td><td>Deal owner</td><td>Reminders stop; the parts team is asked to amend the PI (I5).</td></tr>
+        <tr><td>Deal stage → Order Confirmation</td><td>Deal owner</td><td>SAP creates the sales order from the PI; C6 to the client, I6 to the parts team.</td></tr>
+        <tr><td>Deal stage → Disqualify</td><td>Deal owner or parts team</td><td>C2 to the client, deal closed lost, draft PI closed.</td></tr>
+        <tr><td>Credit exemption → Approved / Rejected</td><td>Head of Sales</td><td>Deal owner is told. Rejected sends the deal back to Negotiation.</td></tr>
+        <tr><td>Deal stage → Closed Lost + reason</td><td>Deal owner</td><td>Open PIs closed in SAP.</td></tr>
+      </table>
+    </div>
+    <div class="note">
+      <span class="label">Set by SAP, not by you</span>
+      PI number, PI link, PI valid until, amount, sales order number, expected delivery date, amount paid, balance, receipt link, invoice number, delivery note.
+    </div>
+  </section>
+
+  <section id="sp-timers">
+    <h2>Timers and deadlines</h2>
+    <p class="lead">All counts are in calendar days unless stated.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>When</th><th>What happens</th></tr>
+        <tr class="group"><td colspan="2">From the request</td></tr>
+        <tr><td>+ 2 minutes</td><td>C1 and the WhatsApp message to the client; draft PI created in SAP.</td></tr>
+        <tr><td>+ 1 working day</td><td>Deadline to disqualify a request we cannot supply.</td></tr>
+        <tr><td>+ 24 hours unpriced</td><td>I2 to the deal owner.</td></tr>
+        <tr><td>+ 48 hours unpriced</td><td>I2 to the Head of Sales.</td></tr>
+        <tr><td>+ 30 days, no PI sent</td><td>Closed lost as "Unresponsive Contact", C10 to the client.</td></tr>
+        <tr class="group"><td colspan="2">From the day the PI was sent</td></tr>
+        <tr><td>+ 2 business days</td><td>Deal owner's follow-up task is due (I4).</td></tr>
+        <tr><td>Day 7 and day 14</td><td>Reminder C4, if still in Quote Sent.</td></tr>
+        <tr><td>Day 24</td><td>Final reminder C5, if still in Quote Sent.</td></tr>
+        <tr><td>Day 30</td><td>Closed lost as "Unresponsive Contact" with C10, if still in Quote Sent or Negotiation.</td></tr>
+        <tr class="group"><td colspan="2">After the order</td></tr>
+        <tr><td>Credit exemption pending 2 days</td><td>Reminder to the Head of Sales.</td></tr>
+      </table>
+    </div>
+    <div class="note">
+      <span class="label">An amended PI restarts the count</span>
+      When the same PI is sent again after changes, reminders start again from that new send date.
+    </div>
+  </section>
+
+  <section id="sp-rules">
+    <h2>Golden rules</h2>
+    <div class="rule-box">
+      <ul>
+        <li><b>Website only.</b> Every parts request comes through the website, so it has a reference and a deal.</li>
+        <li><b>One request, one PI.</b> Always amend the same PI in SAP. Never create a new one.</li>
+        <li><b>The salesperson is the only contact with the client.</b> The pricing team asks through the Pricing question field.</li>
+        <li><b>The client pays against the PI number</b>, not the website reference. C1, C3 and C6 tell them so.</li>
+        <li><b>An alternative part is marked on the PI</b> next to the part number the client asked for.</li>
+        <li><b>Do not move a deal to Quote Sent by hand.</b> Set PI status to Ready to send and let HubSpot send the PI.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB 5 · RENTAL
+     ===================================================================== -->
+<div class="tab-panel" id="rental" data-title="Rental">
+
+  <div class="panel-head">
+    <div class="eyebrow">Pipeline C</div>
+    <h2>Rental pipeline</h2>
+    <p>Renting a machine: a discovery call, a quote, a rental contract, payment and delivery.</p>
+  </div>
+
+
+  <section id="rent-stages">
+    <h2>Stage by stage</h2>
+    <p class="lead">Rental requests are not priced on the website. Everything starts with a call.</p>
+    <div class="flow"><span>1 Client Inquiry</span><i>→</i><span>2 Discovery Call</span><i>→</i><span>3 Quote Sent</span><i>⇄</i><span>4 Negotiation</span><i>→</i><span>5 Order Confirmation</span><i>→</i><span>6 Payment</span><i>→</i><span class="won">7 Delivered</span></div>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">1</div><h3>Client Inquiry</h3><div class="where"><span class="tag web">Website</span><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>The deal, contact and company are created in the Rental pipeline with the reference, owned by the rental owner.</li>
+          <li>Rental dates, type, estimated hours, services and delivery address are on the deal notes.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Rental / sales team: read the request and schedule the discovery call.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">Client</span> Acknowledgement (WhatsApp or email).</li>
+          <li><span class="tag internal">Team</span> Rental / sales team: new inquiry with full details.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">2</div><h3>Discovery Call</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li class="none">Nothing</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Hold the call: availability, dates, price, specifications.</li>
+          <li>Log the outcome in the deal notes.</li>
+          <li>Client goes ahead: move to <b>Quote Sent</b>. Not interested: <b>Closed Lost</b>.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">3</div><h3>Quote Sent</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The quote is sent to the client from HubSpot.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Prepare the quote on the deal and follow up the client's answer.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Rental quote.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">4</div><h3>Negotiation</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li class="none">Nothing</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Update the quote with the client's feedback and send it again until it is approved.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Revised quote.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">5</div><h3>Order Confirmation (Rental Approved)</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>Moving here creates the PI in SAP for the deal's company. The SAP number comes back to the deal.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Check the Entity Name, then move the deal here once the client approves and signs.</li>
+          <li>Issue the rental contract: machine and serial number, rental duration and rate, insurance, payment terms.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Order confirmation.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">6</div><h3>Payment Received</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The payment recorded in SAP moves the deal here with the payment reference and amount.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Finance: record each payment in SAP; confirm receipt and next steps with the client.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Payment confirmation.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage won">
+      <div class="stage-head"><div class="stage-num">7</div><h3>Delivered · Closed Won</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The delivery note in SAP closes the deal as Closed Won.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Logistics: deliver the machine to the agreed place. Warehouse: issue the delivery note.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag internal">Team</span> All parties: delivered.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage lost">
+      <div class="stage-head"><div class="stage-num">8</div><h3>Closed Lost</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The open PI in SAP is closed.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Move the deal to Closed Lost with a reason. SAP team cancels the sales order if one was created.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody</li></ul></div>
+      </div>
+    </article>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB 6 · MAINTENANCE
+     ===================================================================== -->
+<div class="tab-panel" id="maintenance" data-title="Maintenance">
+
+  <div class="panel-head">
+    <div class="eyebrow">Pipeline D · Aftersales</div>
+    <h2>Maintenance pipeline</h2>
+    <p>Service requests: a discovery call, a technician on site, an inspection report per machine, parts if needed, a quotation and the service order.</p>
+  </div>
+
+
+  <section id="mnt-request">
+    <h2>The maintenance request</h2>
+    <p class="lead">The Aftersales form creates one deal with a full request summary. There are no item rows.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>On the deal</th><th>What to know</th></tr>
+        <tr><td>Support level and priority</td><td>The support level the client chose sets the deal priority.</td></tr>
+        <tr><td>Machine</td><td>Model, serial number, operating hours, ForLife membership.</td></tr>
+        <tr><td>The issue</td><td>Issue type, when it started, whether the machine is running, service needed, preferred time.</td></tr>
+        <tr><td>Files</td><td>Photos, videos or the machine list template, as links.</td></tr>
+        <tr><td>Summary note</td><td>Everything the client wrote. If a field is empty, the answer is usually in the summary.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="mnt-stages">
+    <h2>Stage by stage</h2>
+    <p class="lead">Two paths after the first call: a <b>general inspection</b> or a <b>warranty call</b>.</p>
+    <div class="flow"><span>1 Inquiry</span><i>→</i><span>2 Discovery Call</span><i>→</i><span>3 Technician Dispatch</span><i>→</i><span>4 TIR &amp; Parts</span><i>→</i><span>5 Spare Parts</span><i>→</i><span>6 Quotation</span><i>→</i><span>7 Order Confirmation</span><i>→</i><span>8 Payment</span><i>→</i><span class="won">9 Case Closure</span></div>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">1</div><h3>Inquiry Received</h3><div class="where"><span class="tag web">Website</span><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
+          <li>The deal, contact and company are created in the Aftersales pipeline with the reference.</li>
+          <li>The aftersales owner for the country is assigned; a task is created for the technical team lead, due in 1 business day.</li>
+        </ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Service coordinator: review the request and any machine list.</li>
+          <li>Decide the path: <b>general inspection</b> or <b>warranty call</b>, and schedule the discovery call.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul>
+          <li><span class="tag client">Client</span> Acknowledgement with the reference.</li>
+          <li><span class="tag internal">Team</span> Service team: new request + task.</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">2</div><h3>Discovery Call</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li class="none">Nothing</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Ask about machine condition, urgency, scope, and whether the client's technician already knows the parts needed.</li>
+          <li>Parts known: go straight to the <b>Quotation</b>. Otherwise: dispatch a technician.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">3</div><h3>Technician Dispatch</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The assigned technician is notified with the full job details.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul>
+          <li>Service coordinator: assign the technician by machine type, location and availability.</li>
+          <li>Technician: visit the site and inspect every machine in the request.</li>
+        </ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag internal">Team</span> Technician: job assigned.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">4</div><h3>TIR &amp; Spare Parts</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>Parts listed in an inspection report: the spare parts team is notified with the parts and quantities.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Technician: fill one Technical Inspection Report (TIR) per machine on the tablet: details, observations, tasks done, parts needed.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag internal">Team</span> Spare parts team: parts needed.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">5</div><h3>Spare Parts Process</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>Waits for the stock check result.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Spare parts team: check stock in SAP. In stock: goods issue at once. Not in stock: order from the OEM.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li class="none">Nobody</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">6</div><h3>Quotation</h3><div class="where"><span class="tag hs">HubSpot</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The quotation is built in HubSpot with the service items and parts, and emailed with <b>Accept</b> and <b>Request changes</b> buttons.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Service team: give the scope, labour hours, part numbers, quantities and prices.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Service quotation.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">7</div><h3>Order Confirmation</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>When the client approves and signs, the service order is created in SAP with the machine list, site address and service category.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>SAP team: create the service sales quotation and schedule the date.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag internal">Team</span> Technician: service order confirmed.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-head"><div class="stage-num">8</div><h3>Payment Received</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>The payment recorded in SAP moves the deal here with the reference and amount.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Finance: record the payment (or each instalment); confirm with the client.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Payment confirmation.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="stage won">
+      <div class="stage-head"><div class="stage-num">9</div><h3>Case Closure · Closed Won</h3><div class="where"><span class="tag hs">HubSpot</span><span class="tag sap">SAP</span></div></div>
+      <div class="stage-body">
+        <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul><li>When SAP marks the service order complete, the deal closes as won and the TIR links are stored and emailed to the client.</li></ul></div>
+        <div class="stage-col c-hmd"><span class="col-title">✎ HMD team</span><ul><li>Technician: submit every TIR. Service manager: review and close the case. SAP team: close the service order.</li></ul></div>
+        <div class="stage-col c-notify"><span class="col-title">Notified</span><ul><li><span class="tag client">Client</span> Inspection reports.</li></ul></div>
+      </div>
+    </article>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB 7 · NOTIFICATIONS
+     ===================================================================== -->
+<div class="tab-panel" id="notifications" data-title="Notifications">
+
+  <div class="panel-head">
+    <div class="eyebrow">Every message in one place</div>
+    <h2>Who is notified, and when</h2>
+    <p>Client messages go out in the name of the contact owner, and replies come back to them. Team alerts arrive as HubSpot emails or tasks.</p>
+  </div>
+
+  <section id="nt-all">
+    <h2>All pipelines</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>When</th><th>Who</th><th>Message</th></tr>
+        <tr><td>Deal created from the website (after about 2 minutes)</td><td><span class="tag client">Client</span></td><td>Welcome message with the request reference, by WhatsApp, email or both, as the client chose. WhatsApp if they chose nothing.</td></tr>
+        <tr><td>Deal created</td><td><span class="tag internal">Deal owner</span></td><td>HubSpot assignment notification.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="nt-parts">
+    <h2>Spare parts: client emails</h2>
+    <p class="lead">Emails named <span class="code">INVO | SP | C1</span> to <span class="code">C10</span> in HubSpot.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Code</th><th>Subject the client sees</th><th>Sent when</th></tr>
+        <tr><td>C1</td><td>We have received your spare parts request – ref. …</td><td>The request arrives (with the WhatsApp message).</td></tr>
+        <tr><td>C2</td><td>Your spare parts request …</td><td>The deal moves to Disqualify.</td></tr>
+        <tr><td>C3</td><td>Your proforma invoice … – ref. …</td><td>PI status is set to Ready to send. Again after each amendment.</td></tr>
+        <tr><td>C4</td><td>Reminder: your proforma invoice …</td><td>Days 7 and 14 after the PI, if still in Quote Sent.</td></tr>
+        <tr><td>C5</td><td>Your proforma invoice … expires on …</td><td>Day 24 after the PI, if still in Quote Sent.</td></tr>
+        <tr><td>C6</td><td>Order confirmed – PI …</td><td>The sales order number arrives from SAP.</td></tr>
+        <tr><td>C7</td><td>Payment received – PI …</td><td>Every payment registered in SAP, with the receipt link.</td></tr>
+        <tr><td>C8</td><td>Update on your order – PI …</td><td>The expected delivery date changes after the order.</td></tr>
+        <tr><td>C9</td><td>Your order … has been delivered</td><td>The signed delivery note is in SAP.</td></tr>
+        <tr><td>C10</td><td>Your spare parts request … has been closed</td><td>Auto-close after 30 days without confirmation.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="nt-parts-team">
+    <h2>Spare parts: team alerts</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Code</th><th>Who</th><th>Sent when</th></tr>
+        <tr><td>I1</td><td>Entity parts team, deal owner in copy</td><td>The draft PI exists in SAP: new request to price.</td></tr>
+        <tr><td>I2</td><td>Deal owner (24 h), Head of Sales (48 h)</td><td>The PI is still unpriced.</td></tr>
+        <tr><td>I3</td><td>Deal owner (task, due today)</td><td>The parts team writes a Pricing question.</td></tr>
+        <tr><td>I4</td><td>Deal owner (task, 2 business days)</td><td>The PI was sent: follow up.</td></tr>
+        <tr><td>I5</td><td>Deal owner, then parts team</td><td>The deal moves to Negotiation: amend the PI.</td></tr>
+        <tr><td>I6</td><td>Entity parts team, deal owner in copy</td><td>Order confirmed: re-check stock today.</td></tr>
+        <tr><td>I7</td><td>Head of Sales</td><td>The order takes the client over their credit line. Reminder after 2 days.</td></tr>
+        <tr><td>I8</td><td>Deal owner</td><td>A payment is registered, with the balance remaining.</td></tr>
+        <tr><td>I9</td><td>Deal owner</td><td>The delivery date changes. Call the client if a machine is down.</td></tr>
+        <tr><td>I10</td><td>Deal owner</td><td>Delivered and closed won.</td></tr>
+        <tr><td>I11 <span class="tag planned">Planned</span></td><td>Deal owner, entity parts team</td><td>The deal is closed lost.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="nt-other">
+    <h2>Machinery, Rental and Maintenance</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>When</th><th>Who</th><th>Message</th></tr>
+        <tr class="group"><td colspan="3">Machinery</td></tr>
+        <tr><td>Deal created</td><td><span class="tag client">Client</span></td><td>Quote email with Accept / Accept with PO / Request changes.</td></tr>
+        <tr><td>Days 7, 14 and 24 without an answer</td><td><span class="tag client">Client</span></td><td>Reminder to accept the quote or ask for changes.</td></tr>
+        <tr><td>Client asks for changes</td><td><span class="tag internal">Deal owner</span></td><td>Change request alert.</td></tr>
+        <tr><td>Order Confirmation</td><td><span class="tag client">Client</span></td><td>Order confirmation.</td></tr>
+        <tr><td>Proforma approved by finance</td><td><span class="tag client">Client</span></td><td>Proforma and payment instructions.</td></tr>
+        <tr><td>Payment recorded</td><td><span class="tag client">Client</span></td><td>Payment confirmation.</td></tr>
+        <tr><td>PDI passed</td><td><span class="tag client">Client</span> <span class="tag internal">HMD</span></td><td>PDI passed, report link.</td></tr>
+        <tr><td>Delivered</td><td><span class="tag client">Client</span> <span class="tag internal">All</span></td><td>Delivery documents; deal closed won.</td></tr>
+        <tr class="group"><td colspan="3">Rental</td></tr>
+        <tr><td>Deal created</td><td><span class="tag client">Client</span> <span class="tag internal">Rental team</span></td><td>Acknowledgement to the client; full inquiry details to the team.</td></tr>
+        <tr><td>Quote Sent / Negotiation</td><td><span class="tag client">Client</span></td><td>Quote, then revised quotes.</td></tr>
+        <tr><td>Order Confirmation · Payment</td><td><span class="tag client">Client</span></td><td>Order confirmation; payment confirmation.</td></tr>
+        <tr><td>Delivered</td><td><span class="tag internal">All</span></td><td>Deal closed won.</td></tr>
+        <tr class="group"><td colspan="3">Maintenance</td></tr>
+        <tr><td>Request received</td><td><span class="tag client">Client</span> <span class="tag internal">Service team</span></td><td>Acknowledgement with the reference; task for the technical team lead (1 business day).</td></tr>
+        <tr><td>Technician assigned</td><td><span class="tag internal">Technician</span></td><td>Job details.</td></tr>
+        <tr><td>Parts found in a TIR</td><td><span class="tag internal">Spare parts team</span></td><td>Parts and quantities to check.</td></tr>
+        <tr><td>Quotation ready</td><td><span class="tag client">Client</span></td><td>Quotation with Accept / Request changes.</td></tr>
+        <tr><td>Service order confirmed</td><td><span class="tag internal">Technician</span></td><td>Service order details.</td></tr>
+        <tr><td>Payment · Case closed</td><td><span class="tag client">Client</span></td><td>Payment confirmation; inspection reports.</td></tr>
+      </table>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB 8 · HELP
+     ===================================================================== -->
+<div class="tab-panel" id="help" data-title="Help">
+
+  <div class="panel-head">
+    <div class="eyebrow">When something looks wrong</div>
+    <h2>Help and glossary</h2>
+    <p>An error does not mean nothing was saved. Always check before asking the client to submit again.</p>
+  </div>
+
+  <section id="help-problems">
+    <h2>If something goes wrong</h2>
     <div class="table-wrap">
       <table>
         <tr><th>Situation</th><th>What you do</th></tr>
-        <tr><td>Customer sees a "required field" or submission error</td><td>Help them complete the missing information. If the details are correct and the error stays, report it.</td></tr>
+        <tr><td>Client sees a "required field" or submission error</td><td>Help them complete the missing information. If the details are right and the error stays, report it.</td></tr>
         <tr><td>Part of a mixed cart fails</td><td>Check each request and deal first. Other parts may already be saved. Do not duplicate a part that worked.</td></tr>
-        <tr><td>Bulk / Quick Order saved, but the customer is told to contact HMD</td><td>Find the reference, look for an existing deal, and ask the administrator to complete what is missing.</td></tr>
-        <tr><td>Maintenance deal created with a warning</td><td>Use the existing deal. The details are in the Description or summary. Ask the administrator to fix the missing note or field. Do not create a second request.</td></tr>
-        <tr><td>Items, notes or contact links look incomplete</td><td>Compare the customer's request with the deal before quoting or confirming. Not every failure shows a warning.</td></tr>
-        <tr><td>Customer lost connection or got no confirmation</td><td>Search by email, company and recent request details before they resubmit. This avoids duplicates.</td></tr>
-        <tr><td>SAP handover or order creation fails</td><td>Check the order status card on the deal, then contact the HubSpot / SAP administrator. Do not move the stage again until they confirm.</td></tr>
+        <tr><td>Bulk / Quick Order saved, but the client is told to contact HMD</td><td>Find the reference, look for an existing deal, and ask Invocom to complete what is missing.</td></tr>
+        <tr><td>Maintenance deal created with a warning</td><td>Use the existing deal. The details are in the description or summary. Do not create a second request.</td></tr>
+        <tr><td>Client lost connection or got no confirmation</td><td>Search by email, company and recent request before they resubmit.</td></tr>
+        <tr><td>No PI number on a spare parts deal after a few minutes</td><td>Check the Entity Name and the line items are there, then report it to Invocom.</td></tr>
+        <tr><td>PI changed in SAP but the deal total did not</td><td>Make sure the change was made on the same PI, and it is still open. Report it if the deal stays out of date.</td></tr>
+        <tr><td>Client did not receive the PI email (C3)</td><td>Check PI status is Sent and the client's email on the contact is right. Send the PI link from the deal's order card if needed.</td></tr>
+        <tr><td>Wrong HMD company on the deal</td><td>Fix the Entity Name <b>before</b> the PI or sales order is created. If one already exists, ask the SAP team.</td></tr>
+        <tr><td>SAP order creation fails</td><td>Check the order card on the deal, then contact Invocom or the SAP administrator. Do not move the stage again until they confirm.</td></tr>
       </table>
     </div>
-
     <h3>When you report a problem</h3>
     <ol class="steps">
-      <li>Record the request reference, deal reference, request type, time of submission and the error message shown.</li>
-      <li>Check what was already created.</li>
-      <li>Send the details to the website / HubSpot administrator or the SAP administrator.</li>
+      <li>Note the request reference, deal link, pipeline, time and the error shown.</li>
+      <li>Check what was already created: contact, company, deal, PI.</li>
+      <li>Send the details to Invocom (website and HubSpot) or the SAP administrator.</li>
     </ol>
-
     <div class="action">
       <span class="label">What you do</span>
-      Keep the reference and the error. Check for existing records. Repair the existing request instead of creating a new one.
+      Keep the reference and the error. Repair the existing deal instead of creating a new one.
     </div>
   </section>
 
-<footer>
-    Prepared by Invocom for the HMD sales team.
-  </footer>
-
+  <section id="help-glossary">
+    <h2>Glossary</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Word</th><th>Meaning</th></tr>
+        <tr><td>Request reference</td><td>The number the website gives each request. Shown as Order reference on the deal.</td></tr>
+        <tr><td>PI · Proforma invoice</td><td>The priced offer sent to the client. In SAP it is the Sales Quotation.</td></tr>
+        <tr><td>SO · Sales order</td><td>Created in SAP from the PI once the client confirms.</td></tr>
+        <tr><td>A/R invoice</td><td>The tax invoice issued by finance in SAP against the sales order.</td></tr>
+        <tr><td>DN · Delivery note</td><td>The SAP document for the goods handed over. Signed by the client at delivery.</td></tr>
+        <tr><td>Entity</td><td>The HMD company that sells the deal, and its SAP database.</td></tr>
+        <tr><td>Deal owner</td><td>The salesperson responsible for the deal and the client.</td></tr>
+        <tr><td>Parts Executives</td><td>The HMD parts pricing team of each entity.</td></tr>
+        <tr><td>PDI</td><td>Pre-delivery inspection of a machine before it goes to the client.</td></tr>
+        <tr><td>TIR</td><td>Technical inspection report: one per machine, filled by the technician.</td></tr>
+        <tr><td>Incoterms</td><td>Delivery terms such as FOB or CIF that set who pays freight and insurance.</td></tr>
+        <tr><td>Closed Won · Closed Lost</td><td>The two end states of a deal: delivered, or not going ahead.</td></tr>
+      </table>
+    </div>
+  </section>
 </div>
+
+  </main>
+</div>
+
+<footer>
+  Prepared by Invocom for the HMD team · Version 2 · 26 October 2026
+</footer>
+
+<script>
+  // Tabs + left menu. The URL hash is a tab id (#parts) or a section id (#sp-stages).
+  (function () {
+    var panels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
+    var buttons = Array.prototype.slice.call(document.querySelectorAll(".tabbar button"));
+    var sideList = document.getElementById("side-list");
+    var sideTitle = document.getElementById("side-title");
+    var observer = null;
+
+    function buildSidebar(panel) {
+      sideTitle.textContent = panel.getAttribute("data-title");
+      sideList.innerHTML = "";
+      panel.querySelectorAll("section[id]").forEach(function (sec) {
+        var h = sec.querySelector("h2");
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = "#" + sec.id;
+        a.textContent = h ? h.textContent : sec.id;
+        li.appendChild(a);
+        sideList.appendChild(li);
+      });
+      watchSections(panel);
+    }
+
+    function setActiveLink(id) {
+      sideList.querySelectorAll("a").forEach(function (a) {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+      });
+    }
+
+    function watchSections(panel) {
+      if (observer) observer.disconnect();
+      if (!("IntersectionObserver" in window)) return;
+      observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) setActiveLink(e.target.id); });
+      }, { rootMargin: "-80px 0px -65% 0px" });
+      panel.querySelectorAll("section[id]").forEach(function (s) { observer.observe(s); });
+    }
+
+    function show(hash, scroll) {
+      var id = (hash || "").replace(/^#/, "");
+      var target = id ? document.getElementById(id) : null;
+      var panel = target ? (target.classList.contains("tab-panel") ? target : target.closest(".tab-panel")) : null;
+      if (!panel) panel = panels[0];
+      panels.forEach(function (p) { p.classList.toggle("active", p === panel); });
+      buttons.forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-tab") === panel.id ? "true" : "false"); });
+      buildSidebar(panel);
+      if (!scroll) return;
+      if (target && target !== panel) {
+        target.scrollIntoView();
+        setActiveLink(target.id);
+      } else {
+        window.scrollTo(0, document.querySelector(".tabbar").offsetTop);
+      }
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () { location.hash = b.getAttribute("data-tab"); });
+    });
+    window.addEventListener("hashchange", function () { show(location.hash, true); });
+    show(location.hash, !!location.hash);
+  })();
+</script>
 
 <!-- Logo image data. Do not edit. -->
 <style>
