@@ -230,7 +230,7 @@
   <div class="cover-inner">
     <div class="cover-top">
       <div class="logo" role="img" aria-label="Invocom"></div>
-      <div>HMD operations · Version 2 · 26 October 2026</div>
+      <div>HMD operations · Version 3 · 11 November 2026</div>
     </div>
     <div class="eyebrow">HMD · Team guide</div>
     <h1>Website, HubSpot and SAP</h1>
@@ -239,7 +239,7 @@
     <div class="meta">
       <div><span>For</span>HMD sales, parts, service, finance and logistics teams</div>
       <div><span>Prepared by</span>Invocom</div>
-      <div><span>Replaces</span>Sales team guide of 05 October 2026</div>
+      <div><span>Replaces</span>Version 2 of 26 October 2026</div>
     </div>
   </div>
 </header>
@@ -249,6 +249,7 @@
   <div class="tabbar-inner" role="tablist">
     <button role="tab" data-tab="overview">Overview</button>
     <button role="tab" data-tab="website">Website &amp; HubSpot</button>
+    <button role="tab" data-tab="catalogue">Products &amp; prices</button>
     <button role="tab" data-tab="machinery"><span class="dot" style="background:var(--navy)"></span>Machinery</button>
     <button role="tab" data-tab="parts"><span class="dot" style="background:var(--red)"></span>Spare Parts</button>
     <button role="tab" data-tab="rental"><span class="dot" style="background:var(--teal)"></span>Rental</button>
@@ -285,6 +286,7 @@
       <table>
         <tr><th>Tab</th><th>Read it when</th></tr>
         <tr><td>Website &amp; HubSpot</td><td>You want to know what the customer fills in, what you find on a deal, who owns it and which HMD company it belongs to.</td></tr>
+        <tr><td>Products &amp; prices</td><td>You want to know where the website's products and prices come from, and who fixes them.</td></tr>
         <tr><td>Machinery · Spare Parts · Rental · Maintenance</td><td>You work deals in that pipeline. Each tab shows the stages, what happens by itself, what you do and who is notified.</td></tr>
         <tr><td>Notifications</td><td>You want one list of every email, WhatsApp message, task and alert, and when it goes out.</td></tr>
         <tr><td>Help</td><td>Something looks wrong, or you meet a word you do not know.</td></tr>
@@ -381,8 +383,22 @@
   </section>
 
   <section id="ov-new">
-    <h2>What changed since the last guide</h2>
-    <p class="lead">Version 2 replaces the sales team guide of 05 October 2026.</p>
+    <h2>What's new</h2>
+    <p class="lead">The latest changes first. Version 3 replaces version 2 of 26 October 2026.</p>
+    <h3>Version 3 · 11 November 2026</h3>
+    <ul class="checklist">
+      <li><b>SAP Global is the one source for the catalogue.</b> Machines, attachments and spare parts on the website and the products in HubSpot come only from SAP Global. See the <a href="#catalogue">Products &amp; prices tab</a>.</li>
+      <li><b>Prices follow the client's country.</b> The website shows the Nigeria, Ghana or Guinea price from SAP, else the general website price. See <a href="#cat-prices">Prices on the website</a>.</li>
+      <li><b>Rental machines are set in SAP.</b> A machine with a Rental Method in SAP appears for rent on the website. See <a href="#cat-rental">Rental machines</a>.</li>
+      <li><b>About 105,000 spare parts from SAP</b> are now in the website catalogue. See <a href="#cat-parts">Spare parts catalogue</a>.</li>
+      <li><b>Machinery quotes use the HMD company of the destination country</b> and go out in the deal owner's name. See the <a href="#mach-stages">Machinery stages</a>.</li>
+      <li><b>New rules for the proforma invoice</b>: no salesperson name, VAT row only when there is VAT, bank details always shown. See <a href="#web-docs">Documents</a>.</li>
+      <li><b>Exchange rates come from SAP only.</b> The SAP team must enter the daily rate. See <a href="#web-sap">Sending a deal to SAP</a>.</li>
+      <li><b>Spam protection</b> on the cart and the maintenance form, and the visitor's source is recorded on the contact. See <a href="#web-request">How a request starts</a>.</li>
+      <li><b>Supplier applications</b> have their own HubSpot form and alert. See <a href="#web-suppliers">Supplier applications</a>.</li>
+      <li><b>Every HubSpot user can open SAP documents</b> with the View button on the deal.</li>
+    </ul>
+    <h3>Version 2 · 26 October 2026</h3>
     <ul class="checklist">
       <li><b>Deal owner rules are new.</b> Rental has one dedicated owner. Machinery and parts first keep the client's existing owner. See <a href="#web-owner">Who owns the deal</a>.</li>
       <li><b>The HMD company is set automatically</b> from the destination country. You no longer pick it by hand. See <a href="#web-entity">Which HMD company</a>.</li>
@@ -421,6 +437,14 @@
       <span class="label">The deal form</span>
       The deal form in HubSpot follows the pipeline. It shows only the fields that matter for Machinery, Rental, Spare Parts or Maintenance.
     </div>
+    <div class="note">
+      <span class="label">Spam protection</span>
+      The cart and the maintenance form check in the background that a real person is submitting. The client sees nothing. Very rarely a genuine client is blocked and sees an error: ask them to try again, or from another browser.
+    </div>
+    <div class="note">
+      <span class="label">Where the visitor came from</span>
+      When the client's browser allows it, the request also records their website visit on the HubSpot contact (for example Google search, an ad, or social media). You will see a submission of the form <b>"HMD | Website Enquiry (API)"</b> on the contact timeline. That is normal and is not a second request.
+    </div>
   </section>
 
   <section id="web-parts-form">
@@ -451,7 +475,7 @@
         <tr><td>Entity Name</td><td>The HMD company and SAP database for this deal. See <a href="#web-entity">Which HMD company</a>.</td></tr>
         <tr><td>Close date</td><td>Set to 7 days after the request. It is not a delivery or service promise.</td></tr>
         <tr><td>Currency and source</td><td>USD, and lead source "Website".</td></tr>
-        <tr><td>Amount</td><td>Machinery: filled when website prices exist. Spare parts: filled from the PI once it exists in SAP, and kept in step with it. Rental and Maintenance are not priced automatically.</td></tr>
+        <tr><td>Amount</td><td>Machinery: filled in USD from the price for the destination country, when SAP has one (see <a href="#cat-prices">Prices on the website</a>). The price is always checked again by the system, so a client cannot change it in the browser. Spare parts: filled from the PI once it exists in SAP, and kept in step with it. Rental and Maintenance are not priced automatically.</td></tr>
         <tr><td>Description and notes</td><td>The customer's notes and contact preference. Rental dates, type, hours and services; part serial numbers; file links; the full Maintenance summary.</td></tr>
         <tr><td>Shipping</td><td>Destination country, port and Incoterms when chosen. Spare parts also show branch collection or port.</td></tr>
         <tr><td>Items</td><td>Name, quantity, unit price when there is one. Machinery items carry the machine specifications. Bulk / Quick Order items say "Pricing to be confirmed". Tuboshu ForLife shows two rows: the machine and the coverage (quantity = hours, price = hourly rate).</td></tr>
@@ -476,6 +500,24 @@
     <div class="note">
       <span class="label">Preferred channel belongs to the contact</span>
       If the same client orders again and picks a different channel, the new choice is used from then on, for all their deals.
+    </div>
+    <div class="note">
+      <span class="label">Mining companies</span>
+      HubSpot needs a Mining commodities value for every Mining company. A new Mining company from the website gets <b>"Lead"</b>. Change it to the real commodity once you know it.
+    </div>
+  </section>
+
+  <section id="web-suppliers">
+    <h2>Supplier applications</h2>
+    <p class="lead">Suppliers who want to work with HMD apply through their own form, not the cart.</p>
+    <ol class="steps">
+      <li>The supplier fills in the <b>HMD | Supplier Form</b> in HubSpot (link on the website).</li>
+      <li>HubSpot saves them as a contact of type <b>Supplier</b>, and their company with the answers in the <b>Supplier information</b> section.</li>
+      <li>Each application emails <b>Gisele Bou Rached</b> and <b>Tony El Khoury</b>.</li>
+    </ol>
+    <div class="note">
+      <span class="label">Not a sales lead</span>
+      A supplier application creates no deal. <span class="tag planned">Planned</span> Supplier file uploads (catalogues, certificates) are being connected.
     </div>
   </section>
 
@@ -557,8 +599,15 @@
         <li>The <b>Proforma Invoice (PI)</b> is the SAP <b>Sales Quotation</b>. The PI number on the deal is that quotation number.</li>
         <li>Client emails carry a link to the PI or receipt, not an attachment.</li>
         <li>Every change to an open PI in SAP updates the deal's lines and total automatically.</li>
+        <li>Every HubSpot user can open the documents.</li>
       </ul>
     </div>
+    <h3>What the proforma invoice shows</h3>
+    <ul class="checklist">
+      <li><b>No salesperson name</b> on the document.</li>
+      <li><b>The VAT row appears only when there is VAT.</b> HMD FZE quotations carry no VAT.</li>
+      <li><b>Bank details are always shown</b>, including IBAN and SWIFT. A dash (—) means SAP has no value: ask the SAP team to add it to the company's bank details.</li>
+    </ul>
   </section>
 
   <section id="web-sap">
@@ -576,6 +625,117 @@
     <div class="action">
       <span class="label">What you do</span>
       Before the move that creates a document, check the client, company, items, quantities, agreed prices and Entity Name. Each deal has one PI. Changes are made on that same PI.
+    </div>
+    <h3>Exchange rates</h3>
+    <ol class="steps">
+      <li>The <b>SAP team enters the exchange rate every day</b> in each SAP company, for example NGN for Nigeria, or USD to AED for Metamac.</li>
+      <li>A new PI always uses SAP's rate for today. The automation never changes a rate the SAP team entered.</li>
+      <li>If today has no rate, SAP's most recent rate from the last 14 days is copied as today's rate.</li>
+      <li>If there is no rate at all in the last 14 days, <b>the PI is not created</b>. Enter the rate in SAP, then ask Invocom to run it again.</li>
+    </ol>
+  </section>
+</div>
+
+<!-- =====================================================================
+     TAB · PRODUCTS & PRICES
+     ===================================================================== -->
+<div class="tab-panel" id="catalogue" data-title="Products &amp; prices">
+
+  <div class="panel-head">
+    <div class="eyebrow">The catalogue</div>
+    <h2>Products and prices</h2>
+    <p>Where the machines, attachments and spare parts on the website and in HubSpot come from, and which price the client sees.</p>
+  </div>
+
+  <section id="cat-source">
+    <h2>SAP Global is the source</h2>
+    <p class="lead">Every product on the website and in HubSpot comes from one SAP company: <b>SAP Global</b>.</p>
+    <div class="flow"><span>SAP Global</span><i>→</i><span>Website catalogue</span><i>→</i><span>HubSpot products</span></div>
+    <ul class="checklist">
+      <li><b>Change a product in SAP Global only.</b> Changes to items in the country companies (Nigeria, FZE, Ghana, HEDA) never reach the website or HubSpot.</li>
+      <li><b>Changes flow by themselves.</b> A name, price, photo or specification changed in SAP Global updates the website and the HubSpot product.</li>
+      <li><b>The sync can be paused</b> while the SAP team cleans data. Changes made during the pause are not lost: they are applied when the sync is turned back on.</li>
+      <li><b>Machines and attachments go to HubSpot as products. Spare parts do not</b>: they are on the website only.</li>
+    </ul>
+    <div class="action">
+      <span class="label">What you do</span>
+      Something is wrong on the website (name, photo, price, specification)? Ask the SAP team to fix it in SAP Global, not in HubSpot or a country company.
+    </div>
+  </section>
+
+  <section id="cat-fields">
+    <h2>What the SAP team fills in</h2>
+    <p class="lead">For each machine and attachment in SAP Global. The website shows only what SAP has.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>In SAP Global</th><th>On the website</th></tr>
+        <tr><td>Item type</td><td><b>Product</b> for machines and attachments, <b>SP</b> for spare parts. A wrong type puts the item in the wrong catalogue.</td></tr>
+        <tr><td>Publish / Unpublish</td><td>Only published machines are shown.</td></tr>
+        <tr><td>Name, brand, product type</td><td>The product title, brand filter and category.</td></tr>
+        <tr><td>Industries</td><td>Chosen from SAP's industries list. Shown as the industries the machine is for.</td></tr>
+        <tr><td>Photo 1</td><td>The <b>product photo</b>, on a white background.</td></tr>
+        <tr><td>Photo</td><td>The <b>background image</b> behind the product.</td></tr>
+        <tr><td>Specifications</td><td>Every filled specification field (weight, power, capacity and so on) appears in the product's specifications.</td></tr>
+        <tr><td>Prices and currency</td><td>See <a href="#cat-prices">Prices on the website</a>.</td></tr>
+        <tr><td>HubSpot ID</td><td>Links the SAP item to its HubSpot product. A wrong ID updates the wrong product.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="cat-prices">
+    <h2>Prices on the website</h2>
+    <p class="lead">The SAP team enters the prices on each item in SAP Global. The checkout picks the price for the client's destination country.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Destination country</th><th>Price the client sees</th></tr>
+        <tr><td>Nigeria</td><td>Nigeria price (also used for HMD FZE)</td></tr>
+        <tr><td>Ghana</td><td>Ghana DDP price</td></tr>
+        <tr><td>Guinea</td><td>Guinea price</td></tr>
+        <tr><td>All other countries</td><td>Website price</td></tr>
+        <tr><td>Country price empty</td><td>Website price</td></tr>
+      </table>
+    </div>
+    <div class="note">
+      <span class="label">Good to know</span>
+      <ul>
+        <li>Prices are in the <b>item's currency</b> in SAP. Most are USD, but some brands (for example Bomag, Epiroc, Sandvik) are in EUR or GBP. The deal amount is always converted to USD.</li>
+        <li>Prices are whole numbers.</li>
+        <li>The <b>West Africa</b> and <b>Ghana Bonded Warehouse</b> prices are stored but not used by the website yet.</li>
+        <li>Attachments (for example brooms and sweepers) have no price: the client asks for a quote.</li>
+        <li>A machine with no price can still be requested. The deal shows no amount and the deal owner prices it.</li>
+      </ul>
+    </div>
+    <h3>HubSpot products</h3>
+    <ul class="checklist">
+      <li>Each machine has one HubSpot product, linked to SAP by its item code.</li>
+      <li>The product <b>price is the SAP website price, in USD</b>.</li>
+      <li>All the SAP prices, in their original currency, are in the product's <b>Website prices</b> section.</li>
+    </ul>
+  </section>
+
+  <section id="cat-rental">
+    <h2>Rental machines</h2>
+    <p class="lead">SAP decides which machines are for rent.</p>
+    <ul class="checklist">
+      <li>A machine is <b>for rent</b> when SAP Global has a <b>Rental Method</b>: Hourly or Daily. It can be for rent and for sale at the same time.</li>
+      <li>The <b>rental country</b> in SAP (for example "Nigeria, Ghana, Guinea", or "Global") decides where the website offers it.</li>
+      <li>Rental term (short or long), minimum rental period, availability (in stock, rented, not available) and potential users show as specifications.</li>
+      <li>There are <b>no rental prices</b> in SAP yet. Rental requests are priced by the rental team after the discovery call.</li>
+    </ul>
+  </section>
+
+  <section id="cat-parts">
+    <h2>Spare parts catalogue</h2>
+    <p class="lead">About 105,000 spare parts from SAP Global are in the website catalogue.</p>
+    <ul class="checklist">
+      <li>Each part has its SAP name, brand, category and, where SAP has them, equivalent part numbers.</li>
+      <li><b>SAP has no prices or stock for spare parts.</b> The parts team prices every request on the PI (see the <a href="#sp-stages">Spare Parts tab</a>).</li>
+      <li>New or changed spare parts in SAP are held, then added in one batch once approved.</li>
+      <li>Old parts that are not in SAP will be removed from the website later.</li>
+    </ul>
+    <div class="action">
+      <span class="label">What you do</span>
+      A client asks for a part that is not on the website? Ask them to use <b>Bulk / Quick Order</b> with the part number. Ask the SAP team to add the part to SAP Global.
     </div>
   </section>
 </div>
@@ -602,7 +762,8 @@
       <div class="stage-body">
         <div class="stage-col c-auto"><span class="col-title">⚡ Automatic</span><ul>
           <li>The deal, contact and company are created with the website reference.</li>
-          <li>A quote is built in HubSpot from the cart and emailed to the client.</li>
+          <li>A quote is built in HubSpot from the cart and emailed to the client, in the deal owner's name.</li>
+          <li>The quote template follows the destination country: <b>Guinea</b> → HEDA, <b>Nigeria</b> → HMD FZE, <b>Ghana</b> → HMD Ghana, <b>other countries</b> → HMD website quotation.</li>
           <li>The client can <b>accept</b>, <b>accept and upload a PO</b>, or <b>request changes</b>.</li>
           <li>No answer: reminders on days 7, 14 and 24. Still no answer: the deal moves to <b>Closed Lost</b>.</li>
         </ul></div>
@@ -1262,6 +1423,7 @@
         <tr><th>When</th><th>Who</th><th>Message</th></tr>
         <tr><td>Deal created from the website (after about 2 minutes)</td><td><span class="tag client">Client</span></td><td>Welcome message with the request reference, by WhatsApp, email or both, as the client chose. WhatsApp if they chose nothing.</td></tr>
         <tr><td>Deal created</td><td><span class="tag internal">Deal owner</span></td><td>HubSpot assignment notification.</td></tr>
+        <tr><td>Supplier application submitted</td><td><span class="tag internal">Gisele Bou Rached, Tony El Khoury</span></td><td>New supplier application, with a link to the contact.</td></tr>
       </table>
     </div>
   </section>
@@ -1362,6 +1524,12 @@
         <tr><td>PI changed in SAP but the deal total did not</td><td>Make sure the change was made on the same PI, and it is still open. Report it if the deal stays out of date.</td></tr>
         <tr><td>Client did not receive the PI email (C3)</td><td>Check PI status is Sent and the client's email on the contact is right. Send the PI link from the deal's order card if needed.</td></tr>
         <tr><td>Wrong HMD company on the deal</td><td>Fix the Entity Name <b>before</b> the PI or sales order is created. If one already exists, ask the SAP team.</td></tr>
+        <tr><td>The PI was not created in SAP</td><td>Check that SAP has an exchange rate in the last 14 days for that company. If not, the SAP team enters it, then ask Invocom to run it again.</td></tr>
+        <tr><td>Wrong name, photo, price or specification on the website</td><td>Ask the SAP team to correct the item in <b>SAP Global</b>. Changes in HubSpot or a country company are not used.</td></tr>
+        <tr><td>A machine shows no price</td><td>SAP has no price for that country or a website price. Ask the SAP team to add it. Meanwhile the deal owner prices the request.</td></tr>
+        <tr><td>A machine is missing from the website</td><td>Check in SAP Global that it is <b>published</b> and typed <b>Product</b>. A spare part typed Product (or the reverse) lands in the wrong catalogue.</td></tr>
+        <tr><td>A dash (—) for IBAN or SWIFT on the PI</td><td>SAP has no value. Ask the SAP team to complete the company's bank details.</td></tr>
+        <tr><td>A deal from an @invocom.me address</td><td>An Invocom test. It is owned by Invocom and can be ignored.</td></tr>
         <tr><td>SAP order creation fails</td><td>Check the order card on the deal, then contact Invocom or the SAP administrator. Do not move the stage again until they confirm.</td></tr>
       </table>
     </div>
@@ -1388,6 +1556,10 @@
         <tr><td>A/R invoice</td><td>The tax invoice issued by finance in SAP against the sales order.</td></tr>
         <tr><td>DN · Delivery note</td><td>The SAP document for the goods handed over. Signed by the client at delivery.</td></tr>
         <tr><td>Entity</td><td>The HMD company that sells the deal, and its SAP database.</td></tr>
+        <tr><td>SAP Global</td><td>The SAP company that holds the master list of products and prices for the website and HubSpot.</td></tr>
+        <tr><td>Website price</td><td>The general price in SAP Global, used when there is no price for the client's country.</td></tr>
+        <tr><td>DDP</td><td>Delivered Duty Paid: the price includes delivery and import duties. Used for Ghana.</td></tr>
+        <tr><td>Bonded warehouse</td><td>Goods held before import duties are paid. The Ghana Bonded price is stored but not used yet.</td></tr>
         <tr><td>Deal owner</td><td>The salesperson responsible for the deal and the client.</td></tr>
         <tr><td>Parts Executives</td><td>The HMD parts pricing team of each entity.</td></tr>
         <tr><td>PDI</td><td>Pre-delivery inspection of a machine before it goes to the client.</td></tr>
@@ -1403,7 +1575,7 @@
 </div>
 
 <footer>
-  Prepared by Invocom for the HMD team · Version 2 · 26 October 2026
+  Prepared by Invocom for the HMD team · Version 3 · 11 November 2026
 </footer>
 
 <script>
